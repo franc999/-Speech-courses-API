@@ -2,6 +2,8 @@ package com.manuels.principal.controller;
 
 import com.manuels.principal.exceptions.NotFoundException;
 import com.manuels.principal.models.Publication;
+import com.manuels.principal.models.Image;
+import com.manuels.principal.service.ImageService;
 import com.manuels.principal.service.PublicationService;
 
 import java.util.List;
@@ -30,9 +32,19 @@ public class PublicationController {
     @Autowired
     private PublicationService publicationService;
     
+    @Autowired
+    private ImageService imageService;
+    
     @PostMapping
-    public ResponseEntity<Publication> create(@RequestBody Publication publication){
+    public ResponseEntity<Publication> create(@RequestBody Publication publication) throws NotFoundException{
         
+        Image image = imageService.find(publication.getImage().getIdImage());
+        
+        if(image == null){
+            throw new NotFoundException("Not found image");
+        }
+        
+        publication.setImage(image);
         return ResponseEntity.status(HttpStatus.CREATED).body(publicationService.create(publication));
     }
     
