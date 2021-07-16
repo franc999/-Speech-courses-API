@@ -35,6 +35,6 @@ public class Publication implements Serializable{
     private String descripcion;
     
     @OneToOne(cascade=CascadeType.ALL)
-    @JoinColumn(name = "id_image")
+    @JoinColumn(name = "id_img")
     private Image image;
 }

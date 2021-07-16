@@ -75,7 +75,7 @@ public class LessonServiceTest {
         lesson.setForWho("para vos");
         lesson.setTeacher("teacher");
         lesson.setTitle("title");
-        lesson.setDuration(90);
+        lesson.setDuration("90");
         lesson.setQuota(50);
         
         lesson1.setDates(dates);
@@ -84,7 +84,7 @@ public class LessonServiceTest {
         lesson1.setForWho("para fasfsadasda");
         lesson1.setTeacher("asdasdas");
         lesson1.setTitle("asdasads");
-        lesson1.setDuration(60);
+        lesson1.setDuration("60");
         lesson1.setQuota(40);
         
         List<Lesson>lessons = new ArrayList();
@@ -115,7 +115,7 @@ public class LessonServiceTest {
         lesson.setForWho("para vos");
         lesson.setTeacher("teacher");
         lesson.setTitle("title");
-        lesson.setDuration(90);
+        lesson.setDuration("90");
         lesson.setQuota(50);
         
         given(lessonMock.save(lesson)).willAnswer
@@ -145,7 +145,7 @@ public class LessonServiceTest {
         lesson.setForWho("para vos");
         lesson.setTeacher("teacher");
         lesson.setTitle("title");
-        lesson.setDuration(90);
+        lesson.setDuration("90");
         lesson.setQuota(50);
         
         given(lessonMock.findById(lesson.getIdLesson()))
@@ -200,7 +200,7 @@ public class LessonServiceTest {
         lesson.setForWho("para vos");
         lesson.setTeacher("teacher");
         lesson.setTitle("title");
-        lesson.setDuration(90);
+        lesson.setDuration("90");
         lesson.setQuota(50);
         
         lessonService.delete(lesson);
