@@ -8,8 +8,8 @@ CREATE TABLE lesson (id_lesson INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
                      requeriments VARCHAR(200) NOT NULL,
                      forWho VARCHAR(100) NOT NULL,
                      teacher VARCHAR(60) NOT NULL,
-                     duration SMALLINT NOT NULL);
-                     
+                     duration VARCHAR(30) NOT NULL);
+	
 CREATE TABLE date(id_date INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
 				  date DATE);
                   
@@ -36,5 +36,5 @@ CREATE TABLE publication(id_publication INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
 CREATE TABLE user(id_user INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
 				  username VARCHAR(40) NOT NULL,
                   password VARCHAR(164) NOT NULL);
-
-select *from image;
+select *from user;
+INSERT INTO publication (title, description, id_img) values ("hola","lala",1);
