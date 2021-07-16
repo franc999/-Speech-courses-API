@@ -1,6 +1,7 @@
 package com.manuels.principal.models;
 
 import java.util.Date;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,7 +18,9 @@ public class DateC{
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_date")
     private Long idDate;
     
+    @Column(name = "date")
     private Date date;
 }
