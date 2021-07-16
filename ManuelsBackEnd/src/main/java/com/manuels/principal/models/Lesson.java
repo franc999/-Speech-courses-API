@@ -37,7 +37,7 @@ public class Lesson implements Serializable{
     @Column(name = "requeriments")
     private String requeriments;
     
-    @Column(name = "forWho")
+    @Column(name = "for_who")
     private String forWho;
     
     @Column(name = "teacher")
