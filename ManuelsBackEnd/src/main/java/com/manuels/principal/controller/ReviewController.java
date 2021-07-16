@@ -1,8 +1,8 @@
 package com.manuels.principal.controller;
 
 import com.manuels.principal.exceptions.NotFoundException;
-import com.manuels.principal.models.DateC;
-import com.manuels.principal.service.DateService;
+import com.manuels.principal.models.Review;
+import com.manuels.principal.service.ReviewService;
 
 import java.util.List;
 
@@ -22,54 +22,54 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RequestMapping("/api/dates")
+@RequestMapping("/api/reviews")
 @RestController
 @CrossOrigin(origins = "*", methods= {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
-public class DateController {
+public class ReviewController {
     //@RequestParam recupera por parameter
     @Autowired
-    private DateService dateService;
+    private ReviewService reviewService;
     
     @PostMapping
-    public ResponseEntity<DateC> create(@RequestBody DateC date){
+    public ResponseEntity<Review> create(@RequestBody Review review){
         
-        return ResponseEntity.status(HttpStatus.CREATED).body(dateService.create(date));
+        return ResponseEntity.status(HttpStatus.CREATED).body(reviewService.create(review));
     }
     
     @GetMapping
-    public List<DateC> listAll(){
-        return dateService.listDates();
+    public List<Review> listAll(){
+        return reviewService.listReviews();
     }
     
     @GetMapping("/{id}")
-    public ResponseEntity<DateC> readBy(@PathVariable(value = "id") Long idDate) throws NotFoundException{
+    public ResponseEntity<Review> readBy(@PathVariable(value = "id") Long idReview) throws NotFoundException{
 
-        DateC date = dateService.find(idDate);
+        Review review = reviewService.find(idReview);
 
-        if (date == null) {
+        if (review == null) {
             
-            throw new NotFoundException("Not found date");
+            throw new NotFoundException("Not found review");
             //return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(date);
+        return ResponseEntity.ok(review);
     }
     
     @PutMapping("/{id}")
-    public ResponseEntity<DateC> update(@RequestBody DateC dateC,
-           @PathVariable(value = "id") Long idDate){
-        return ResponseEntity.status(HttpStatus.CREATED).body(dateService.update(dateC));
+    public ResponseEntity<Review> update(@RequestBody Review review,
+           @PathVariable(value = "id") Long idReview){
+        return ResponseEntity.status(HttpStatus.CREATED).body(reviewService.update(review));
     }
     
     @DeleteMapping("/{id}")
-    public ResponseEntity<DateC> delete(@PathVariable(value = "id") Long idDate) {
+    public ResponseEntity<Review> delete(@PathVariable(value = "id") Long idReview) {
 
-        DateC date = dateService.find(idDate);
+        Review review = reviewService.find(idReview);
 
-        if (date == null) {
+        if (review == null) {
             return ResponseEntity.notFound().build();
         }
 
-        dateService.delete(date);
+        reviewService.delete(review);
         return ResponseEntity.ok().build();
     }
 }

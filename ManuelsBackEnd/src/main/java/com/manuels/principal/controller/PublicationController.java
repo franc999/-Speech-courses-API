@@ -1,8 +1,8 @@
 package com.manuels.principal.controller;
 
 import com.manuels.principal.exceptions.NotFoundException;
-import com.manuels.principal.models.DateC;
-import com.manuels.principal.service.DateService;
+import com.manuels.principal.models.Publication;
+import com.manuels.principal.service.PublicationService;
 
 import java.util.List;
 
@@ -22,54 +22,54 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RequestMapping("/api/dates")
+@RequestMapping("/api/publications")
 @RestController
 @CrossOrigin(origins = "*", methods= {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
-public class DateController {
+public class PublicationController {
     //@RequestParam recupera por parameter
     @Autowired
-    private DateService dateService;
+    private PublicationService publicationService;
     
     @PostMapping
-    public ResponseEntity<DateC> create(@RequestBody DateC date){
+    public ResponseEntity<Publication> create(@RequestBody Publication publication){
         
-        return ResponseEntity.status(HttpStatus.CREATED).body(dateService.create(date));
+        return ResponseEntity.status(HttpStatus.CREATED).body(publicationService.create(publication));
     }
     
     @GetMapping
-    public List<DateC> listAll(){
-        return dateService.listDates();
+    public List<Publication> listAll(){
+        return publicationService.listPublications();
     }
     
     @GetMapping("/{id}")
-    public ResponseEntity<DateC> readBy(@PathVariable(value = "id") Long idDate) throws NotFoundException{
+    public ResponseEntity<Publication> readBy(@PathVariable(value = "id") Long idReview) throws NotFoundException{
 
-        DateC date = dateService.find(idDate);
+        Publication publication = publicationService.find(idReview);
 
-        if (date == null) {
+        if (publication == null) {
             
-            throw new NotFoundException("Not found date");
+            throw new NotFoundException("Not found publication");
             //return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(date);
+        return ResponseEntity.ok(publication);
     }
     
     @PutMapping("/{id}")
-    public ResponseEntity<DateC> update(@RequestBody DateC dateC,
-           @PathVariable(value = "id") Long idDate){
-        return ResponseEntity.status(HttpStatus.CREATED).body(dateService.update(dateC));
+    public ResponseEntity<Publication> update(@RequestBody Publication publication,
+           @PathVariable(value = "id") Long idPublication){
+        return ResponseEntity.status(HttpStatus.CREATED).body(publicationService.update(publication));
     }
     
     @DeleteMapping("/{id}")
-    public ResponseEntity<DateC> delete(@PathVariable(value = "id") Long idDate) {
+    public ResponseEntity<Publication> delete(@PathVariable(value = "id") Long idPublication) {
 
-        DateC date = dateService.find(idDate);
+        Publication publication = publicationService.find(idPublication);
 
-        if (date == null) {
+        if (publication == null) {
             return ResponseEntity.notFound().build();
         }
 
-        dateService.delete(date);
+        publicationService.delete(publication);
         return ResponseEntity.ok().build();
     }
 }

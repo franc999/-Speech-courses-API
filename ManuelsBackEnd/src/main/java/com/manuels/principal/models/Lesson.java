@@ -44,7 +44,7 @@ public class Lesson implements Serializable{
     private String teacher;
     
     @Column(name = "duration")
-    private int duration;
+    private String duration;
     
     @Column(name = "quota")
     private int quota;
