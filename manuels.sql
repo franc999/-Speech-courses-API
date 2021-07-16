@@ -6,7 +6,7 @@ CREATE TABLE lesson (id_lesson INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
                      description VARCHAR(400) NOT NULL,
                      quota SMALLINT NOT NULL,
                      requeriments VARCHAR(200) NOT NULL,
-                     forWho VARCHAR(100) NOT NULL,
+                     forwho VARCHAR(100) NOT NULL,
                      teacher VARCHAR(60) NOT NULL,
                      duration VARCHAR(30) NOT NULL);
                      
