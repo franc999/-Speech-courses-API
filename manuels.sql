@@ -2,13 +2,15 @@ CREATE DATABASE manuels_DB;
 USE manuels_DB;
 
 CREATE TABLE lesson (id_lesson INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
-					 title VARCHAR(30) NOT NULL,
-                     description VARCHAR(400) NOT NULL,
+					 title VARCHAR(50) NOT NULL,
+                     description VARCHAR(500) NOT NULL,
                      quota SMALLINT NOT NULL,
-                     requeriments VARCHAR(200) NOT NULL,
-                     forwho VARCHAR(100) NOT NULL,
+                     requeriments VARCHAR(250) NOT NULL,
+                     forwho VARCHAR(200) NOT NULL,
                      teacher VARCHAR(60) NOT NULL,
-                     duration VARCHAR(30) NOT NULL);
+                     duration VARCHAR(150) NOT NULL);
+                     
+                     ALTER TABLE lesson MODIFY duration varchar(150);
                      
 CREATE TABLE date(id_date INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
 				  date DATE);
