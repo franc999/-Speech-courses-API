@@ -9,7 +9,7 @@ CREATE TABLE lesson (id_lesson INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
                      forWho VARCHAR(100) NOT NULL,
                      teacher VARCHAR(60) NOT NULL,
                      duration VARCHAR(30) NOT NULL);
-	
+                     
 CREATE TABLE date(id_date INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
 				  date DATE);
                   
