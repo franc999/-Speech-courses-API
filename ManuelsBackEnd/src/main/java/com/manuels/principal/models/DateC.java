@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
@@ -21,6 +22,7 @@ public class DateC{
     @Column(name = "id_date")
     private Long idDate;
     
+    @NotNull
     @Column(name = "date")
     private Date date;
 }

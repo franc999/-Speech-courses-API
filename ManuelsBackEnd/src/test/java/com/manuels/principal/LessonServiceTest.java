@@ -38,19 +38,7 @@ public class LessonServiceTest {
     
     @InjectMocks
     private LessonService lessonService;
-    
-    /*
-    
-    
-    public Lesson update(Lesson lesson);
-    
- 
-    
-    public Lesson findWithId(Long idLesson);
-    
-    public List<Lesson> findByName(String title); */
-    
-        
+           
     @Test
     public void listLessonsTest(){
         
@@ -154,7 +142,7 @@ public class LessonServiceTest {
         verify(lessonMock, never()).save(any(Lesson.class));
     }
     
-    /*@Test
+    @Test
     public void findLessonByNameTest(){
         
         Lesson lesson = new Lesson();
@@ -171,7 +159,7 @@ public class LessonServiceTest {
         lesson.setForWho("para vos");
         lesson.setTeacher("teacher");
         lesson.setTitle("title");
-        lesson.setDuration(90);
+        lesson.setDuration("90 minutos");
         lesson.setQuota(50);
         
         String title = "title";
@@ -180,7 +168,7 @@ public class LessonServiceTest {
                 .willReturn(Optional.of(lesson));
 
         verify(lessonMock, never()).save(any(Lesson.class));
-    }*/
+    }
     
     @Test
     public void deleteLessonTest(){

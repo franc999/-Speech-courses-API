@@ -1,5 +1,4 @@
 package com.manuels.principal.service;
-import java.util.Optional;
 import java.util.List;
 import com.manuels.principal.models.Image;
 
