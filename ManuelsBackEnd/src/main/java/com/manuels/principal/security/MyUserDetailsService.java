@@ -1,0 +1,27 @@
+package com.manuels.principal.security;
+
+import java.util.Optional;
+import com.manuels.principal.models.User;
+import com.manuels.principal.dao.IUserDao;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
+
+@Service
+public class MyUserDetailsService implements UserDetailsService{
+    
+    @Autowired
+    private IUserDao userDao;
+    
+    @Override
+    public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
+        Optional<User> user = userDao.findByUserName(userName);
+        
+        user.orElseThrow(() -> new UsernameNotFoundException("Not found :" + userName));
+        
+        return user.map(MyUserDetails::new).get();
+    }
+}
