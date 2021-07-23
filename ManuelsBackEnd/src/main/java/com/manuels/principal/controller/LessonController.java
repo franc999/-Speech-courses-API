@@ -34,24 +34,6 @@ public class LessonController {
     @Autowired
     private DateService dateService;
 
-    /*@RequestMapping(value = "/testExceptionHandling",
-            method = RequestMethod.GET)
-    public String testExceptionHandling(@RequestParam int code) {
-        switch (code) {
-            case 401:
-                throw new UnauthorizedException("You are not authorized");
-            case 404:
-                throw new NotFoundException("Requested resource is not found.");
-            case 400:
-                throw new BadRequestException("Please provide resource id.");
-            case 409:
-                throw new FieldAlreadyExistException("Resource already exists in DB.");
-
-            default:
-                return "Yeah...No Exception.";
-        }
-    }*/
-    
     @PostMapping
     public ResponseEntity<Lesson> create(@RequestBody Lesson lesson){
 

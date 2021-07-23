@@ -51,9 +51,7 @@ public class ImageController {
             Image img = new Image(retrievedImage.get().getName(), retrievedImage.get().getType(),
             imageService.decompressBytes(retrievedImage.get().getBytes()));
         }*/
-        
 
-        
         return aux;
     }
     
