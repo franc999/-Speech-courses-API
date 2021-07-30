@@ -44,6 +44,7 @@ public class ReviewServiceTest {
         review1.setCommentary("comentarioooooooo");
         review1.setIdReview(1L);
         review1.setName("review lalal");
+        review1.setValidate(false);
         
         review2.setCommentary("kaskks s ksk");
         review2.setIdReview(2L);
@@ -51,6 +52,8 @@ public class ReviewServiceTest {
         
         reviews.add(review1);
         reviews.add(review2);
+        review1.setValidate(true);
+
         
         given(reviewMock.findAll()).willReturn(reviews);
         
@@ -67,6 +70,8 @@ public class ReviewServiceTest {
         review1.setCommentary("comentarioooooooo");
         review1.setIdReview(1L);
         review1.setName("review lalal");
+        review1.setValidate(false);
+
         
         given(reviewMock.save(review1)).willAnswer
         (invocation -> invocation.getArgument(0));
@@ -86,6 +91,7 @@ public class ReviewServiceTest {
         review1.setCommentary("comentarioooooooo");
         review1.setIdReview(1L);
         review1.setName("review lalal");
+        review1.setValidate(false);
         
         given(reviewMock.findById(review1.getIdReview()))
                 .willReturn(Optional.of(review1));
@@ -101,6 +107,7 @@ public class ReviewServiceTest {
         review1.setCommentary("comentarioooooooo");
         review1.setIdReview(1L);
         review1.setName("review lalal");
+        review1.setValidate(false);
         
         reviewService.delete(review1);
         reviewService.delete(review1);

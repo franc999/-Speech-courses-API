@@ -48,6 +48,9 @@ public class Lesson implements Serializable{
     @Column(name = "quota")
     private int quota;
     
+    @Column(name = "link")
+    private String link;
+    
     @ManyToMany
     @JoinTable(name="lesson_dates"
               ,joinColumns=@JoinColumn(name="fk_lesson")

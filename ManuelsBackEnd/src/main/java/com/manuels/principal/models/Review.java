@@ -26,4 +26,7 @@ public class Review implements Serializable{
     
     @Column(name = "commentary")
     private String commentary;
+    
+    @Column(name = "validate")
+    private Boolean validate;
 }
