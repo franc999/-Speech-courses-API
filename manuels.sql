@@ -36,5 +36,5 @@ CREATE TABLE publication(id_publication INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
 CREATE TABLE user(id_user INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
 				  username VARCHAR(40) NOT NULL,
                   password VARCHAR(164) NOT NULL,
-                  enabled BOOLEAN DEFAULT(0),
-                  roles VARCHAR(100));
+                  enabled BOOLEAN,
+                  roles VARCHAR(100) NOT NULL);
