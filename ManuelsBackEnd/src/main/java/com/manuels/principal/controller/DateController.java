@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RequestMapping("/api/dates")
 @RestController
-@CrossOrigin(origins = "*", methods= {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
+/*@CrossOrigin(origins = "*", methods= {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})*/
 public class DateController {
     //@RequestParam recupera por parameter
     @Autowired
