@@ -25,7 +25,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RequestMapping("/api/lessons")
 @RestController
-@CrossOrigin(origins = "*", methods= {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
+/*@CrossOrigin(origins = "*", methods= {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})*/
+@CrossOrigin(origins = "http://localhost:3000")
 public class LessonController {
 
     @Autowired
