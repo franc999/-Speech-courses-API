@@ -39,14 +39,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/private/authenticate").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/lessons").permitAll()
-                /*.antMatchers(HttpMethod.POST, "/api/lessons").hasRole("ADMIN")
+                .antMatchers(HttpMethod.POST, "/api/lessons").hasRole("ADMIN")
                 .antMatchers(HttpMethod.PUT, "/api/lessons").hasRole("ADMIN")
-                .antMatchers(HttpMethod.DELETE, "/api/lessons").hasRole("ADMIN")*/
+                .antMatchers(HttpMethod.DELETE, "/api/lessons").hasRole("ADMIN")
                 
                 .antMatchers(HttpMethod.GET, "/api/dates").permitAll()
-                /*.antMatchers(HttpMethod.POST, "/api/dates").hasRole("ADMIN")
+                .antMatchers(HttpMethod.POST, "/api/dates").hasRole("ADMIN")
                 .antMatchers(HttpMethod.PUT, "/api/dates").hasRole("ADMIN")
-                .antMatchers(HttpMethod.DELETE, "/api/dates").hasRole("ADMIN")*/
+                .antMatchers(HttpMethod.DELETE, "/api/dates").hasRole("ADMIN")
       
                 .antMatchers(HttpMethod.GET, "/api/images").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/images").permitAll()
@@ -59,9 +59,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.DELETE, "/api/publications/").hasRole("ADMIN")
                 
                 .antMatchers(HttpMethod.GET, "/api/reviews").permitAll()
-                /*.antMatchers(HttpMethod.POST, "/api/reviews").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/reviews").permitAll()
                 .antMatchers(HttpMethod.PUT, "/api/reviews").hasRole("ADMIN")
-                .antMatchers(HttpMethod.DELETE, "/api/reviews").hasRole("ADMIN")*/
+                .antMatchers(HttpMethod.DELETE, "/api/reviews").hasRole("ADMIN")
                 
                 .anyRequest().authenticated()
                 .and().sessionManagement()
