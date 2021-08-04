@@ -29,12 +29,13 @@ public class ReviewService implements IReviewService{
 
     @Override
     public Review update(Review review) {
-        Review existingImage = reviewDao.findById(review.getIdReview()).orElse(null);
+        Review existingReview = reviewDao.findById(review.getIdReview()).orElse(null);
 
-        existingImage.setName(review.getName());
-        existingImage.setCommentary(review.getCommentary());
-
-        return reviewDao.save(existingImage);
+        existingReview.setName(review.getName());
+        existingReview.setCommentary(review.getCommentary());
+        existingReview.setValidate(review.getValidate());
+        
+        return reviewDao.save(existingReview);
     }
 
     @Override
