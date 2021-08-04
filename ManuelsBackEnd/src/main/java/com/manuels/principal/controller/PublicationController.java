@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RequestMapping("/api/publications")
 @RestController
-/*@CrossOrigin(origins = "*", methods= {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})*/
+@CrossOrigin(origins = "http://localhost:3000")
 public class PublicationController {
     //@RequestParam recupera por parameter
     @Autowired
