@@ -26,7 +26,7 @@ public class ReviewService implements IReviewService{
     public void delete(Review review) {
         reviewDao.delete(review);
     }
-
+    
     @Override
     public Review update(Review review) {
         Review existingReview = reviewDao.findById(review.getIdReview()).orElse(null);
@@ -42,4 +42,13 @@ public class ReviewService implements IReviewService{
     public Review find(Long idReview) {
         return reviewDao.findById(idReview).orElse(null);
     } 
+    
+    @Override
+    public Review setTrue(Long idReview) {
+        Review existingReview = reviewDao.findById(idReview).orElse(null);
+
+        existingReview.setValidate(true);
+        
+        return reviewDao.save(existingReview);
+    }
 }

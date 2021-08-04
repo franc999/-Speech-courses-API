@@ -14,4 +14,6 @@ public interface IReviewService {
     public Review update(Review review);
     
     public Review find(Long idReview);
+    
+    public Review setTrue(Long idReview);
 }

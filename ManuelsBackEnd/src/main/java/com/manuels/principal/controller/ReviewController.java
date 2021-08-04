@@ -54,6 +54,11 @@ public class ReviewController {
         return ResponseEntity.ok(review);
     }
     
+    @PutMapping("/accept/{id}")
+    public ResponseEntity<Review> setTrue(@PathVariable(value = "id") Long idReview){
+        return ResponseEntity.status(HttpStatus.CREATED).body(reviewService.setTrue(idReview));
+    }
+    
     @PutMapping("/{id}")
     public ResponseEntity<Review> update(@RequestBody Review review,
            @PathVariable(value = "id") Long idReview){
