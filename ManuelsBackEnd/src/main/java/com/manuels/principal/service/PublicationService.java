@@ -36,6 +36,11 @@ public class PublicationService implements IPublicationService {
 
         existingPublication.setTitle(publication.getTitle());
         existingPublication.setDescripcion(publication.getDescripcion());
+        existingPublication.setDescripcion2(publication.getDescripcion2());
+        existingPublication.setDescripcion3(publication.getDescripcion3());
+        existingPublication.setDescripcion4(publication.getDescripcion4());
+        existingPublication.setSubitutlo(publication.getSubitutlo());
+        existingPublication.setSubitutlo2(publication.getSubitutlo2());
         existingPublication.setImage(publication.getImage());
 
         return publicationDao.save(publication);
@@ -50,5 +55,4 @@ public class PublicationService implements IPublicationService {
     public List<Publication> findByName(String publication) {
         return publicationDao.findByName(publication);
     }
-    
 }

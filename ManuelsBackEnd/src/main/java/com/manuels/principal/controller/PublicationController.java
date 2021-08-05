@@ -61,7 +61,6 @@ public class PublicationController {
         if (publication == null) {
             
             throw new NotFoundException("Not found publication");
-            //return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(publication);
     }

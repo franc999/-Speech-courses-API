@@ -34,6 +34,21 @@ public class Publication implements Serializable{
     @Column(name = "description")
     private String descripcion;
     
+    @Column(name = "descripcion2")
+    private String descripcion2;
+    
+    @Column(name = "descripcion3")
+    private String descripcion3;
+    
+    @Column(name = "descripcion4")
+    private String descripcion4;
+    
+    @Column(name = "subitutlo")
+    private String subitutlo;
+    
+    @Column(name = "subitutlo2")
+    private String subitutlo2;
+    
     @OneToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "id_img")
     private Image image;

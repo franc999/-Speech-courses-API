@@ -39,6 +39,12 @@ CREATE TABLE user(id_user INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
                   enabled BOOLEAN,
                   roles VARCHAR(100) NOT NULL);
                   
+                  alter table publication add column subtitulo VARCHAR(100);
+                  alter table publication add column subtitulo2 VARCHAR(100);
+                  alter table publication add column description1 VARCHAR(100);
+                  alter table publication add column description2 VARCHAR(100);
+                  alter table publication add column description3 VARCHAR(100);
+                  
                   alter table review add column validate BOOLEAN;
 				  alter table lesson add column link VARCHAR(150);
                   
