@@ -50,7 +50,6 @@ public class DateController {
         if (date == null) {
             
             throw new NotFoundException("Not found date");
-            //return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(date);
     }

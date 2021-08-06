@@ -38,13 +38,13 @@ CREATE TABLE user(id_user INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
                   password VARCHAR(164) NOT NULL,
                   enabled BOOLEAN,
                   roles VARCHAR(100) NOT NULL);
-                  
-CREATE TABLE payament(id_payment INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+
+CREATE TABLE payment(id_payment INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
 					  name VARCHAR(40),
-                      datetime datetime,
-                      
-                      voucher INT NOT NULL
-                      );
+                      date date,
+                      payment boolean,
+                      voucher INT NOT NULL,
+                      FOREIGN KEY (voucher) REFERENCES image (id_image) ON DELETE CASCADE);
                   
                   alter table publication add column subtitle VARCHAR(100);
                   alter table publication add column subtitle1 VARCHAR(100);
