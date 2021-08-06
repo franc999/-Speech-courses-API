@@ -29,7 +29,12 @@ CREATE TABLE image(id_image INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
 
 CREATE TABLE publication(id_publication INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
 						 title VARCHAR(30) NOT NULL,
-                         description VARCHAR(1000) NOT NULL,
+                         description VARCHAR(600) NOT NULL,
+                         description1 VARCHAR(600),
+                         description2 VARCHAR(600),
+                         description3 VARCHAR(600),
+                         subtitle VARCHAR(500),
+                         subtitle2 VARCHAR(500),
                          id_img INT NULL,
                          FOREIGN KEY (id_img) REFERENCES image (id_image) ON DELETE CASCADE);
 
@@ -45,14 +50,6 @@ CREATE TABLE payment(id_payment INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
                       payment boolean,
                       voucher INT NOT NULL,
                       FOREIGN KEY (voucher) REFERENCES image (id_image) ON DELETE CASCADE);
-                  
-                  alter table publication add column subtitle VARCHAR(100);
-                  alter table publication add column subtitle1 VARCHAR(100);
-                  alter table publication add column description1 VARCHAR(100);
-                  alter table publication add column description2 VARCHAR(100);
-                  alter table publication add column description3 VARCHAR(100);
-                  
-                  alter table publication modify id_img INT NULL;
                   
                   alter table review add column validate BOOLEAN;
 				  alter table lesson add column link VARCHAR(150);
