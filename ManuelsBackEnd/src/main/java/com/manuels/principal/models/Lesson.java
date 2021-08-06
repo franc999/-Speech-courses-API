@@ -51,6 +51,9 @@ public class Lesson implements Serializable{
     @Column(name = "link")
     private String link;
     
+    @Column(name = "link1")
+    private String link1;
+    
     @ManyToMany
     @JoinTable(name="lesson_dates"
               ,joinColumns=@JoinColumn(name="fk_lesson")
