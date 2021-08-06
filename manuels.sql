@@ -30,7 +30,7 @@ CREATE TABLE image(id_image INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
 CREATE TABLE publication(id_publication INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
 						 title VARCHAR(30) NOT NULL,
                          description VARCHAR(1000) NOT NULL,
-                         id_img INT,
+                         id_img INT NULL,
                          FOREIGN KEY (id_img) REFERENCES image (id_image) ON DELETE CASCADE);
 
 CREATE TABLE user(id_user INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
@@ -39,11 +39,20 @@ CREATE TABLE user(id_user INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
                   enabled BOOLEAN,
                   roles VARCHAR(100) NOT NULL);
                   
-                  alter table publication add column subtitulo VARCHAR(100);
-                  alter table publication add column subtitulo2 VARCHAR(100);
+CREATE TABLE payament(id_payment INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+					  name VARCHAR(40),
+                      datetime datetime,
+                      
+                      voucher INT NOT NULL
+                      );
+                  
+                  alter table publication add column subtitle VARCHAR(100);
+                  alter table publication add column subtitle1 VARCHAR(100);
                   alter table publication add column description1 VARCHAR(100);
                   alter table publication add column description2 VARCHAR(100);
                   alter table publication add column description3 VARCHAR(100);
+                  
+                  alter table publication modify id_img INT NULL;
                   
                   alter table review add column validate BOOLEAN;
 				  alter table lesson add column link VARCHAR(150);

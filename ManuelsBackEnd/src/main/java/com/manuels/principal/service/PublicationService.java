@@ -35,12 +35,12 @@ public class PublicationService implements IPublicationService {
         Publication existingPublication = publicationDao.findById(publication.getIdPublication()).orElse(null);
 
         existingPublication.setTitle(publication.getTitle());
-        existingPublication.setDescripcion(publication.getDescripcion());
-        existingPublication.setDescripcion2(publication.getDescripcion2());
-        existingPublication.setDescripcion3(publication.getDescripcion3());
-        existingPublication.setDescripcion4(publication.getDescripcion4());
-        existingPublication.setSubitutlo(publication.getSubitutlo());
-        existingPublication.setSubitutlo2(publication.getSubitutlo2());
+        existingPublication.setDescription(publication.getDescription());
+        existingPublication.setDescription(publication.getDescription1());
+        existingPublication.setDescription(publication.getDescription2());
+        existingPublication.setDescription(publication.getDescription3());
+        existingPublication.setSubtitle(publication.getSubtitle());
+        existingPublication.setSubtitle(publication.getSubtitle2());
         existingPublication.setImage(publication.getImage());
 
         return publicationDao.save(publication);

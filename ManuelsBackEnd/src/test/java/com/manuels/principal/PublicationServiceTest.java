@@ -49,12 +49,17 @@ public class PublicationServiceTest {
         image.setType("image/jpeg");
         //image.setBytes(bytes);
         
-        publication1.setDescripcion("djdj djkjdk");
+        publication1.setDescription("djdj djkjdk");
+        publication1.setDescription2("djdj djkjdk");
+        publication1.setSubtitle("djdj djkjdk");
         publication1.setIdPublication(1L);
         publication1.setTitle("llalal");
         publication1.setImage(image);
         
-        publication2.setDescripcion("skk ksks");
+        publication2.setDescription("skk ksks");
+        publication1.setDescription2("djdj djkjdk");
+        publication1.setSubtitle("djdj djkjdk");
+        publication1.setSubtitle("djdj djkjdk");
         publication2.setIdPublication(2L);
         publication2.setTitle("lals fkfk");
         publication2.setImage(image);
@@ -82,8 +87,10 @@ public class PublicationServiceTest {
         image.setType("image/jpeg");
         //image.setBytes(bytes);
         
-        publication1.setDescripcion("djdj djkjdk");
+        publication1.setDescription("djdj djkjdk");
+        publication1.setDescription3("djdj djkjdk");
         publication1.setIdPublication(1L);
+        publication1.setSubtitle("djdj djkjdk");
         publication1.setTitle("llalal");
         publication1.setImage(image);
         
@@ -110,7 +117,9 @@ public class PublicationServiceTest {
         image.setType("image/jpeg");
         //image.setBytes(bytes);
         
-        publication1.setDescripcion("djdj djkjdk");
+        publication1.setDescription("djdj djkjdk");
+        publication1.setDescription2("djdj djkjdk");
+        publication1.setSubtitle("djdj djkjdk");
         publication1.setIdPublication(1L);
         publication1.setTitle("llalal");
         publication1.setImage(image);
@@ -134,7 +143,9 @@ public class PublicationServiceTest {
         image.setType("image/jpeg");
         //image.setBytes(bytes);
         
-        publication1.setDescripcion("djdj djkjdk");
+        publication1.setDescription("djdj djkjdk");
+        publication1.setDescription2("djdj djkjdk");
+        publication1.setSubtitle("djdj djkjdk");
         publication1.setIdPublication(1L);
         publication1.setTitle("llalal");
         publication1.setImage(image);

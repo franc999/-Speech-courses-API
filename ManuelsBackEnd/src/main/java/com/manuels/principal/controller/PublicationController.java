@@ -38,13 +38,12 @@ public class PublicationController {
     @PostMapping
     public ResponseEntity<Publication> create(@RequestBody Publication publication) throws NotFoundException{
         
-        Image image = imageService.find(publication.getImage().getIdImage());
-        
-        if(image == null){
-            throw new NotFoundException("Not found image");
+        if(publication.getImage() != null){
+            
+           Image image = imageService.find(publication.getImage().getIdImage());
+           publication.setImage(image);
         }
-        
-        publication.setImage(image);
+
         return ResponseEntity.status(HttpStatus.CREATED).body(publicationService.create(publication));
     }
     

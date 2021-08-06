@@ -32,24 +32,24 @@ public class Publication implements Serializable{
     private String title;
     
     @Column(name = "description")
-    private String descripcion;
+    private String description;
     
-    @Column(name = "descripcion2")
-    private String descripcion2;
+    @Column(name = "description1")
+    private String description1;
     
-    @Column(name = "descripcion3")
-    private String descripcion3;
+    @Column(name = "description2")
+    private String description2;
     
-    @Column(name = "descripcion4")
-    private String descripcion4;
+    @Column(name = "description3")
+    private String description3;
     
-    @Column(name = "subitutlo")
-    private String subitutlo;
+    @Column(name = "subtitle")
+    private String subtitle;
     
-    @Column(name = "subitutlo2")
-    private String subitutlo2;
+    @Column(name = "subtitle2")
+    private String subtitle2;
     
     @OneToOne(cascade=CascadeType.ALL)
-    @JoinColumn(name = "id_img")
+    @JoinColumn(name = "id_img", nullable = true)
     private Image image;
 }
