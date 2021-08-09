@@ -58,7 +58,7 @@ public class ImageService implements IImageService {
         deflater.setInput(data);
         deflater.finish();
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream(data.length);
-        byte[] buffer = new byte[1024];
+        byte[] buffer = new byte[3100];
         
         while (!deflater.finished()) {
             
@@ -80,7 +80,7 @@ public class ImageService implements IImageService {
         Inflater inflater = new Inflater();
         inflater.setInput(data);
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream(data.length);
-        byte[] buffer = new byte[1024];
+        byte[] buffer = new byte[3100];
         
         try {
             while (!inflater.finished()) {
