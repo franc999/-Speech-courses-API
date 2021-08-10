@@ -1,7 +1,6 @@
 package com.manuels.principal.controller;
 
 import com.manuels.principal.exceptions.NotFoundException;
-import com.manuels.principal.exceptions.ErrorMessage;
 import com.manuels.principal.service.PaymentService;
 import com.manuels.principal.models.Payment;
 import com.manuels.principal.models.Image;
@@ -19,7 +18,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
 @RequestMapping("/api/payments")
 @RestController
@@ -35,11 +33,13 @@ public class PaymentController {
     @PostMapping
     public ResponseEntity<Payment> create(@RequestBody Payment payment){
         
-        if(payment.getImage() == null){
+        if(payment.getImage() != null){
             
            Image image = imageService.create(payment.getImage());
            if(image.getIdImage() != null){
                payment.setImage(image);
+           }else{
+               throw new Error("Error inesperado al ingresar la imagen");
            }
         }else{
             throw new Error("Tenes que ingresar el comprobante");
@@ -59,8 +59,7 @@ public class PaymentController {
         Payment payment = paymentService.findWithId(idPayment);
 
         if (payment == null) {
-            
-            throw new NotFoundException("Not found payment");
+            throw new NotFoundException("404 | NO SE ENCUENTRA EL PAGO");
         }
         return ResponseEntity.ok(payment);
     }
@@ -71,7 +70,7 @@ public class PaymentController {
         List<Payment> payments = paymentService.findByName(name);
 
         if (payments.isEmpty()) {
-            throw new NotFoundException("Not found payment");
+            throw new NotFoundException("404 | NO SE ENCUENTRA EL PAGO");
         }
         return ResponseEntity.ok(payments);
     }
@@ -82,7 +81,7 @@ public class PaymentController {
         Payment payment = paymentService.findWithId(idPayment);
 
         if (payment == null) {
-            throw new NotFoundException("Not found payment");
+            throw new NotFoundException("404 | NO SE ENCUENTRA EL PAGO");
         }
 
         paymentService.delete(payment);

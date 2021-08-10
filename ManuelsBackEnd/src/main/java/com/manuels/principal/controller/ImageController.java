@@ -46,15 +46,22 @@ public class ImageController {
     @GetMapping
     public List<Image> read() throws IOException {
         
-        List<Image> aux = imageService.listImages();
-        /*List<Image> images = new ArrayList();
-        
-        for(Image img : images){
-            Image img = new Image(retrievedImage.get().getName(), retrievedImage.get().getType(),
-            imageService.decompressBytes(retrievedImage.get().getBytes()));
+        /*List<Image> aux = imageService.listImages();
+
+        List<Image> images = new ArrayList();
+
+        for(Image img : aux){
+ 
+            Image retrievedImage = new Image(
+                    img.getName(),
+                    img.getType(),
+                    imageService.decompressBytes(img.getBytes()));
+            retrievedImage.setIdImage(img.getIdImage());
+                    
+            images.add(retrievedImage);
         }*/
 
-        return aux;
+        return imageService.listImages();
     }
     
     /*@GetMapping("/{names}")
@@ -78,23 +85,6 @@ public class ImageController {
     @GetMapping("/{names}")
     public List<Image> getImage(@PathVariable("names") String names) throws IOException {
         
-        final List<Image> aux = imageService.findByName(names);
-        List<Image> images = new ArrayList();
-        
-        Image retrievedImage;
-        
-        for(Image img : aux){
-            retrievedImage = new Image(
-                    img.getName(),
-                    img.getType(),
-                    imageService.decompressBytes(img.getBytes()));
-                    retrievedImage.setIdImage(img.getIdImage());
-                    
-            images.add(retrievedImage);
-        }
-        
-        String encodedString = Base64.getEncoder().encodeToString(images.get(0).getBytes());
-        
-        return images;
+        return imageService.findByName(names);
     }
 }

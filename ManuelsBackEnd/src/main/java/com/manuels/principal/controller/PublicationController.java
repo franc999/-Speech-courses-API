@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
 public class PublicationController {
-    //@RequestParam recupera por parameter
+
     @Autowired
     private PublicationService publicationService;
     
@@ -37,8 +37,7 @@ public class PublicationController {
     @PostMapping
     public ResponseEntity<Publication> create(@RequestBody Publication publication) throws NotFoundException{
         
-        if(publication.getImage() != null){
-            
+        if(publication.getImage() != null){ 
            Image image = imageService.find(publication.getImage().getIdImage());
            publication.setImage(image);
         }
@@ -56,8 +55,7 @@ public class PublicationController {
 
         Publication publication = publicationService.find(idReview);
 
-        if (publication == null) {
-            
+        if (publication == null) {   
             throw new NotFoundException("Not found publication");
         }
         return ResponseEntity.ok(publication);

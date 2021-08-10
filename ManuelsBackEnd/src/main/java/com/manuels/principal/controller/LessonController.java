@@ -40,13 +40,11 @@ public class LessonController {
         DateC date;
 
         for (DateC d : lesson.getDates()) {
-
             date = dateService.create(d);
             dates.add(date);
         }
 
         lesson.setDates(dates);
-
         return ResponseEntity.status(HttpStatus.CREATED).body(lessonService.create(lesson));
     }
 
@@ -62,9 +60,7 @@ public class LessonController {
         Lesson lesson = lessonService.findWithId(idLesson);
 
         if (lesson == null) {
-            
             throw new NotFoundException("Not found lesson");
-            //return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(lesson);
     }
@@ -97,7 +93,6 @@ public class LessonController {
     public ResponseEntity<Lesson> update(@RequestBody Lesson lesson) {
 
         for (DateC d : lesson.getDates()) {
-
             dateService.update(d);
         }
 

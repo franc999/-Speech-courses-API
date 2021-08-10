@@ -22,7 +22,13 @@ public class ImageService implements IImageService {
 
     @Override
     public List<Image> listImages() {
-        return imageDao.findAll();
+        
+        List<Image> images = imageDao.findAll();
+        
+        for(Image img : images){
+            img.setBytes(decompressBytes(img.getBytes()));
+        }
+        return images;
     }
 
     @Override
@@ -48,9 +54,25 @@ public class ImageService implements IImageService {
 
     @Override
     public Image find(Long idImage) {
-        return imageDao.findById(idImage).orElse(null);
-    }
+        Image image = imageDao.findById(idImage).orElse(null);
 
+        if(image!=null)
+            image.setBytes(decompressBytes(image.getBytes()));
+        
+        return image;
+    }
+    
+    @Override
+    public List<Image> findByName(String imageName) {
+        
+        List<Image> images = imageDao.findByName(imageName);
+        
+        for(Image img : images){
+            img.setBytes(decompressBytes(img.getBytes()));
+        }
+        return images;
+    }
+    
     // compress the image bytes before storing it in the database
     public byte[] compressBytes(byte[] data) {
 
@@ -94,11 +116,5 @@ public class ImageService implements IImageService {
         }
         
         return outputStream.toByteArray();
-    }
-    
-    @Override
-    public List<Image> findByName(String imageName) {
-        
-        return imageDao.findByName(imageName);
     }
 }

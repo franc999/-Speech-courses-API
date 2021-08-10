@@ -10,18 +10,27 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class PublicationService implements IPublicationService {
-
+    
+    @Autowired
+    private ImageService imageService;
+    
     @Autowired
     private IPublicationDao publicationDao;
     
     @Override
     public List<Publication> listPublications() {
-        return publicationDao.findAll();
+        List<Publication> publications = publicationDao.findAll();
+        
+        for(Publication p : publications){
+            p.setImage(imageService.find(p.getImage().getIdImage()));
+        }
+        return publications;
     }
 
     @Override
     public Publication create(Publication publication) {
-        return publicationDao.save(publication);
+        
+        Publication publication = publicationDao.save(publication);
     }
 
     @Override
