@@ -21,7 +21,11 @@ public class PublicationService implements IPublicationService {
     @Override
     public List<Publication> listPublications() {
         List<Publication> publications = publicationDao.findAll();
-
+        
+        publications.forEach(p -> {
+            p.getImage().setBytes(imageService.decompressBytes(p.getImage().getBytes()));
+        });
+        
         return publications;
     }
     
