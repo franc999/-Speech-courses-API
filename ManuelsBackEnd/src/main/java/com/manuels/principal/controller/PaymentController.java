@@ -9,6 +9,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -47,12 +48,14 @@ public class PaymentController {
         return ResponseEntity.status(HttpStatus.CREATED).body(paymentService.create(payment));
     }
     
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping
     public List<Payment> listAll() {
 
         return paymentService.listPayments();
     }
     
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/{id}")
     public ResponseEntity<Payment> readById(@PathVariable(value = "id") Long idPayment) throws NotFoundException{
 
@@ -64,6 +67,7 @@ public class PaymentController {
         return ResponseEntity.ok(payment);
     }
     
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/names/{name}")
     public ResponseEntity<List<Payment>> readByName(@PathVariable(value = "name") String name) throws NotFoundException{
 
@@ -74,7 +78,8 @@ public class PaymentController {
         }
         return ResponseEntity.ok(payments);
     }
-
+    
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<Payment> delete(@PathVariable(value = "id") Long idPayment) throws NotFoundException{
 
@@ -88,6 +93,7 @@ public class PaymentController {
         return ResponseEntity.ok().build();
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("/{id}")
     public ResponseEntity<Payment> update(@RequestBody Payment payment) {
 

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -28,6 +29,7 @@ public class DateController {
     @Autowired
     private DateService dateService;
     
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping
     public ResponseEntity<DateC> create(@RequestBody DateC date){
         return ResponseEntity.status(HttpStatus.CREATED).body(dateService.create(date));
@@ -49,12 +51,14 @@ public class DateController {
         return ResponseEntity.ok(date);
     }
     
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("/{id}")
     public ResponseEntity<DateC> update(@RequestBody DateC dateC,
            @PathVariable(value = "id") Long idDate){
         return ResponseEntity.status(HttpStatus.CREATED).body(dateService.update(dateC));
     }
     
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<DateC> delete(@PathVariable(value = "id") Long idDate) {
 

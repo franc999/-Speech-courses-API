@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -50,17 +51,20 @@ public class ReviewController {
         return ResponseEntity.ok(review);
     }
     
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("/accept/{id}")
     public ResponseEntity<Review> setTrue(@PathVariable(value = "id") Long idReview){
         return ResponseEntity.status(HttpStatus.CREATED).body(reviewService.setTrue(idReview));
     }
     
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("/{id}")
     public ResponseEntity<Review> update(@RequestBody Review review,
            @PathVariable(value = "id") Long idReview){
         return ResponseEntity.status(HttpStatus.CREATED).body(reviewService.update(review));
     }
     
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<Review> delete(@PathVariable(value = "id") Long idReview) {
 

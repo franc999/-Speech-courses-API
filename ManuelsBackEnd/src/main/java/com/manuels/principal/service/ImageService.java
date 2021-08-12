@@ -25,9 +25,10 @@ public class ImageService implements IImageService {
         
         List<Image> images = imageDao.findAll();
         
-        for(Image img : images){
-            img.setBytes(decompressBytes(img.getBytes()));
-        }
+        images.forEach(img -> {   
+            byte[] bytes = decompressBytes(img.getBytes());
+            img.setBytes(bytes);
+        });
         return images;
     }
 
@@ -80,8 +81,8 @@ public class ImageService implements IImageService {
         deflater.setInput(data);
         deflater.finish();
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream(data.length);
-        byte[] buffer = new byte[3100];
-        
+        byte[] buffer = new byte[4096];//3mb
+
         while (!deflater.finished()) {
             
             int count = deflater.deflate(buffer);
@@ -100,13 +101,14 @@ public class ImageService implements IImageService {
     public byte[] decompressBytes(byte[] data) {
         
         Inflater inflater = new Inflater();
-        inflater.setInput(data);
+        inflater.setInput(data, 0, data.length);
+        
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream(data.length);
-        byte[] buffer = new byte[3100];
+        byte[] buffer = new byte[4096];//3mb
         
         try {
             while (!inflater.finished()) {
-                
+                //bucle infinito
                 int count = inflater.inflate(buffer);
                 outputStream.write(buffer, 0, count);
             }
