@@ -1,6 +1,7 @@
 package com.manuels.principal.service;
 
 import com.manuels.principal.dao.IPublicationDao;
+import com.manuels.principal.models.Image;
 import com.manuels.principal.models.Publication;
 
 import java.util.List;
@@ -33,6 +34,12 @@ public class PublicationService implements IPublicationService {
     @Override
     public Publication create(Publication publication) {
         
+        if(publication.getImage() != null){
+            
+           Image image = imageService.create(publication.getImage());
+           publication.setImage(image);
+        }
+
         return publicationDao.save(publication);
     }
 
