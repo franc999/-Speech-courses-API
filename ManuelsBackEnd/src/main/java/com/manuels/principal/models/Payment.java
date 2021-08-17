@@ -11,10 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
-import javax.validation.constraints.NotNull;
 import lombok.Data;
-import org.springframework.web.multipart.MultipartFile;
 
 @Data
 @Entity
@@ -31,21 +28,11 @@ public class Payment implements Serializable{
     @Column(name = "name")
     private String name;
     
-    @Column(name = "lastname")
-    private String lastname;
-
     @Column(name = "date")
     private LocalDate date;
     
     @Column(name = "payment")
     private Boolean payment;
-    
-    @Transient
-    private MultipartFile file;
-       
-    @Transient
-    @NotNull
-    private String email; 
     
     @OneToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "voucher")
