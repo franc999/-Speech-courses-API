@@ -37,13 +37,11 @@ public class PaymentController {
     @PostMapping
     public ResponseEntity<Payment> create(@ModelAttribute Payment payment) throws NotFoundException, IOException{
         
-        if(payment.getImage() != null){
-            Image img = new Image(payment.getFile().getOriginalFilename(),
+        Image img = new Image(payment.getFile().getOriginalFilename(),
                               payment.getFile().getContentType(),
                               imageService.compressBytes(payment.getFile().getBytes()));
         
-            payment.setImage(img);
-        }
+        payment.setImage(img);
         
         payment.setDate(LocalDate.now());
         payment.setPayment(Boolean.FALSE);
