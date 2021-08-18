@@ -16,7 +16,8 @@ import org.springframework.stereotype.Service;
 public class JwtUtil {
 
     private String SECRET_KEY = "secret";
-
+    private static final int EXPIRATION_TIME = 1000 * 60 * 60;
+    
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
     }

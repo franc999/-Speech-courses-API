@@ -11,7 +11,6 @@ public interface IPublicationDao extends JpaRepository<Publication, Long>{
     @Query(value = "SELECT *FROM publication WHERE title LIKE %?1%", nativeQuery = true)
     public List<Publication> findByName(String title);
     
-    //select *from publication order by date desc;
     @Query(value = "SELECT *FROM publication ORDER BY date DESC", nativeQuery = true)
     public List<Publication> listOrderDate();
     
