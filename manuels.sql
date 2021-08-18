@@ -8,7 +8,9 @@ CREATE TABLE lesson (id_lesson INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
                      requeriments VARCHAR(250) NOT NULL,
                      forwho VARCHAR(200) NOT NULL,
                      teacher VARCHAR(60) NOT NULL,
-                     duration VARCHAR(150) NOT NULL);
+                     duration VARCHAR(150) NOT NULL,
+                     link VARCHAR(150),
+                     link1 VARCHAR(150));
                      
 CREATE TABLE date(id_date INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
 				  date DATE);
@@ -20,11 +22,8 @@ CREATE TABLE lesson_dates(fk_lesson INT NOT NULL,
                           
 CREATE TABLE review(id_review INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
 				    name VARCHAR(20) NOT NULL,
-                    commentary VARCHAR(400) NOT NULL);
-
-drop table publication;
-drop table payment;
-drop table image;
+                    commentary VARCHAR(400) NOT NULL,
+                    validate BOOLEAN);
 
 CREATE TABLE image(id_image INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
 				   name VARCHAR(150),
@@ -39,6 +38,7 @@ CREATE TABLE publication(id_publication INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
                          description3 VARCHAR(600),
                          subtitle VARCHAR(500),
                          subtitle2 VARCHAR(500),
+                         date date,
                          id_img INT NULL,
                          FOREIGN KEY (id_img) REFERENCES image (id_image) ON DELETE CASCADE);
 
@@ -54,8 +54,5 @@ CREATE TABLE user(id_user INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
                   password VARCHAR(164) NOT NULL,
                   enabled BOOLEAN,
                   roles VARCHAR(100) NOT NULL);
-     
-                  alter table review add column validate BOOLEAN;
-				  alter table lesson add column link VARCHAR(150);
-                  alter table lesson add column link1 VARCHAR(150);
+
                   insert into user (username, password, enabled, roles) values ("manuels", "$2y$12$TnkCvHO5hoMI0lGo4E784e.tkNDXyV8j6sataWlvuMZGtLOl/xjeO", 1, "ROLE_ADMIN");

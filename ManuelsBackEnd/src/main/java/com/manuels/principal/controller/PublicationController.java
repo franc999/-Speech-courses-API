@@ -7,6 +7,7 @@ import com.manuels.principal.models.Image;
 import com.manuels.principal.service.ImageService;
 import com.manuels.principal.service.PublicationService;
 import java.io.IOException;
+import java.time.LocalDate;
 
 import java.util.List;
 
@@ -48,6 +49,7 @@ public class PublicationController {
                               imageService.compressBytes(publication.getFile().getBytes()));
 
             publication.setImage(img);
+            //publication.setDate(LocalDate.now());
         }
 
         return ResponseEntity.status(HttpStatus.CREATED).body(publicationService.create(publication));

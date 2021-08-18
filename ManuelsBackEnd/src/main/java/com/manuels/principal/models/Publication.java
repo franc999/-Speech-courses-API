@@ -52,8 +52,8 @@ public class Publication implements Serializable{
     @Column(name = "subtitle2")
     private String subtitle2;
     
-    @Column(name = "date")
-    private LocalDate date;
+    /*@Column(name = "date")
+    private LocalDate date;*/
     
     @Transient
     private MultipartFile file;
