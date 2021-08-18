@@ -48,8 +48,6 @@ public class PublicationController {
                               imageService.compressBytes(publication.getFile().getBytes()));
 
             publication.setImage(img);
-        }else{
-            throw new BadRequestException("No ingresaste un comprobante");
         }
 
         return ResponseEntity.status(HttpStatus.CREATED).body(publicationService.create(publication));

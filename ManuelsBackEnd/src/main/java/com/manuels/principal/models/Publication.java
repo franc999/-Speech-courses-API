@@ -4,6 +4,7 @@ import java.io.Serializable;
 import javax.persistence.CascadeType;
 
 import com.manuels.principal.models.Image;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -50,6 +51,9 @@ public class Publication implements Serializable{
     
     @Column(name = "subtitle2")
     private String subtitle2;
+    
+    @Column(name = "date")
+    private LocalDate date;
     
     @Transient
     private MultipartFile file;
