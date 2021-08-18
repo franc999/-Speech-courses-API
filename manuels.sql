@@ -54,5 +54,6 @@ CREATE TABLE user(id_user INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
                   password VARCHAR(164) NOT NULL,
                   enabled BOOLEAN,
                   roles VARCHAR(100) NOT NULL);
-
+					
+				  alter table publication add column date date;
                   insert into user (username, password, enabled, roles) values ("manuels", "$2y$12$TnkCvHO5hoMI0lGo4E784e.tkNDXyV8j6sataWlvuMZGtLOl/xjeO", 1, "ROLE_ADMIN");

@@ -49,8 +49,10 @@ public class PublicationController {
                               imageService.compressBytes(publication.getFile().getBytes()));
 
             publication.setImage(img);
-            //publication.setDate(LocalDate.now());
         }
+        
+        System.out.println(LocalDate.now());
+        publication.setDate(LocalDate.now());
 
         return ResponseEntity.status(HttpStatus.CREATED).body(publicationService.create(publication));
     }

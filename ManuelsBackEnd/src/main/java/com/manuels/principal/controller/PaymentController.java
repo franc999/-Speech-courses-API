@@ -16,6 +16,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -35,7 +36,7 @@ public class PaymentController {
     private ImageService imageService;
     
     @PostMapping
-    public ResponseEntity<Payment> create(@RequestBody Payment payment) throws IOException{
+    public ResponseEntity<Payment> create(@ModelAttribute Payment payment) throws IOException{
         
         if(payment.getFile() != null){
             Image img = new Image(payment.getFile().getOriginalFilename(),

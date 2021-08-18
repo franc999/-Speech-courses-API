@@ -21,7 +21,7 @@ public class PublicationService implements IPublicationService {
     
     @Override
     public List<Publication> listPublications() {
-        List<Publication> publications = publicationDao.findAll();
+        List<Publication> publications = publicationDao.listOrderDate();
         
         publications.forEach(p -> {
             if(p.getImage() !=  null)

@@ -11,6 +11,10 @@ public interface IPublicationDao extends JpaRepository<Publication, Long>{
     @Query(value = "SELECT *FROM publication WHERE title LIKE %?1%", nativeQuery = true)
     public List<Publication> findByName(String title);
     
+    //select *from publication order by date desc;
+    @Query(value = "SELECT *FROM publication ORDER BY date DESC", nativeQuery = true)
+    public List<Publication> listOrderDate();
+    
     @Query(value = "SELECT i.bytes FROM image i INNER JOIN "
                    + "publication p ON p.id_img = i.id_image"
                    + "WHERE id_publication LIKE ?", nativeQuery = true)

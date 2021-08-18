@@ -43,13 +43,13 @@ public class PaymentService implements IPaymentService{
            payment.setImage(image);
         }
         
-        emailService.sendMail(
+        /*emailService.sendMail(
                 payment.getEmail(),
                 "fnsoftdevmailer@gmail.com", 
                 "\nPago de clase \n" ,
                 payment.getName() + " " +
                 payment.getLastname() + "\n\nPago tu clase, por favor verifica en el panel de control para confirmar el pago\n\n"
-                + "O podes seguir mediante el siguiente enlace de manera mas sencilla : \n\n");
+                + "O podes seguir mediante el siguiente enlace de manera mas sencilla : \n\n");*/
                 
         return paymentDao.save(payment);
     }
