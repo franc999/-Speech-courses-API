@@ -63,4 +63,18 @@ public class LessonService implements ILessonService{
     public Lesson findWithId(Long idLesson) {
         return lessonDao.findById(idLesson).orElse(null);    
     }
+
+    @Override
+    public void moreQuota(Long idLesson) {
+        Lesson lesson = findWithId(idLesson);  
+        lesson.setQuota(lesson.getQuota() + 1);
+        lessonDao.save(lesson);
+    }
+
+    @Override
+    public void lessQuota(Long idLesson) {
+        Lesson lesson = findWithId(idLesson);  
+        lesson.setQuota(lesson.getQuota() - 1);
+        lessonDao.save(lesson);
+    }   
 }

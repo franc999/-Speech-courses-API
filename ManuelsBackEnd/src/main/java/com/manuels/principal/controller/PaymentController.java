@@ -1,10 +1,13 @@
 package com.manuels.principal.controller;
 
+import com.manuels.principal.exceptions.BadRequestException;
 import com.manuels.principal.exceptions.NotFoundException;
 import com.manuels.principal.service.PaymentService;
 import com.manuels.principal.models.Payment;
 import com.manuels.principal.models.Image;
 import com.manuels.principal.service.ImageService;
+import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -32,31 +35,20 @@ public class PaymentController {
     private ImageService imageService;
     
     @PostMapping
-    public ResponseEntity<Payment> create(@RequestBody Payment payment){
+    public ResponseEntity<Payment> create(@RequestBody Payment payment) throws IOException{
         
-<<<<<<< HEAD
+        if(payment.getFile() != null){
             Image img = new Image(payment.getFile().getOriginalFilename(),
-                              payment.getFile().getContentType(),
-                              imageService.compressBytes(payment.getFile().getBytes()));
-        
-            payment.setImage(img);
-        
-        payment.setDate(LocalDate.now());
-        payment.setPayment(Boolean.FALSE);
-        
-=======
-        if(payment.getImage() != null){
+                            payment.getFile().getContentType(),
+            imageService.compressBytes(payment.getFile().getBytes()));
             
-           Image image = imageService.create(payment.getImage());
-           if(image.getIdImage() != null){
-               payment.setImage(image);
-           }else{
-               throw new Error("Error inesperado al ingresar la imagen");
-           }
+            payment.setImage(img);
+            payment.setDate(LocalDate.now());
+            payment.setPayment(Boolean.FALSE); 
         }else{
-            throw new Error("Tenes que ingresar el comprobante");
+            throw new BadRequestException("No ingresaste un comprobante");
         }
->>>>>>> 1938940 (Revert "payment, email, and others")
+   
         return ResponseEntity.status(HttpStatus.CREATED).body(paymentService.create(payment));
     }
     
@@ -110,5 +102,19 @@ public class PaymentController {
     public ResponseEntity<Payment> update(@RequestBody Payment payment) {
 
         return ResponseEntity.status(HttpStatus.CREATED).body(paymentService.update(payment));
+    }
+    
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PutMapping("/accept/{id}/{idLess}")
+    public ResponseEntity<Payment> setTrue(@PathVariable(value = "id") Long idPayment,
+                                           @PathVariable(value = "idLess") Long idLesson){
+        return ResponseEntity.status(HttpStatus.CREATED).body(paymentService.setTrue(idPayment, idLesson));
+    }
+    
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PutMapping("/decline/{id}/{idLess}")
+    public ResponseEntity<Payment> setFalse(@PathVariable(value = "id") Long idPayment,
+                                            @PathVariable(value = "idLess") Long idLesson){
+        return ResponseEntity.status(HttpStatus.CREATED).body(paymentService.setFalse(idPayment, idLesson));
     }
 }
