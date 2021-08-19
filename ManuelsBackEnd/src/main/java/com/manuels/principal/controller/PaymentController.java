@@ -38,7 +38,9 @@ public class PaymentController {
     @PostMapping
     public ResponseEntity<Payment> create(@ModelAttribute Payment payment) throws IOException{
         
-        if(payment.getFile() != null){
+        System.out.println(payment);
+        
+        if(payment.getFile() != null && payment.getEmail() != null){
             Image img = new Image(payment.getFile().getOriginalFilename(),
                             payment.getFile().getContentType(),
             imageService.compressBytes(payment.getFile().getBytes()));
@@ -106,16 +108,14 @@ public class PaymentController {
     }
     
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @PutMapping("/accept/{id}/{idLess}")
-    public ResponseEntity<Payment> setTrue(@PathVariable(value = "id") Long idPayment,
-                                           @PathVariable(value = "idLess") Long idLesson){
-        return ResponseEntity.status(HttpStatus.CREATED).body(paymentService.setTrue(idPayment, idLesson));
+    @PutMapping("/accept/{id}")
+    public ResponseEntity<Payment> setTrue(@PathVariable(value = "id") Long idPayment){
+        return ResponseEntity.status(HttpStatus.CREATED).body(paymentService.setTrue(idPayment));
     }
     
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @PutMapping("/decline/{id}/{idLess}")
-    public ResponseEntity<Payment> setFalse(@PathVariable(value = "id") Long idPayment,
-                                            @PathVariable(value = "idLess") Long idLesson){
-        return ResponseEntity.status(HttpStatus.CREATED).body(paymentService.setFalse(idPayment, idLesson));
+    @PutMapping("/decline/{id}")
+    public ResponseEntity<Payment> setFalse(@PathVariable(value = "id") Long idPayment){
+        return ResponseEntity.status(HttpStatus.CREATED).body(paymentService.setFalse(idPayment));
     }
 }

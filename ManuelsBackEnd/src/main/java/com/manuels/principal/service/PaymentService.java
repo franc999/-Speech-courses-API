@@ -37,19 +37,18 @@ public class PaymentService implements IPaymentService{
     @Override
     public Payment create(Payment payment) {
         
-        if(payment.getImage() != null){
-            
-           Image image = imageService.create(payment.getImage());
-           payment.setImage(image);
-        }
+        Image image = imageService.create(payment.getImage());
+        payment.setImage(image);
         
-        /*emailService.sendMail(
+        lessonService.lessQuota(payment.getLesson().getIdLesson());
+        
+        emailService.sendMail(
                 payment.getEmail(),
                 "fnsoftdevmailer@gmail.com", 
                 "\nPago de clase \n" ,
                 payment.getName() + " " +
                 payment.getLastname() + "\n\nPago tu clase, por favor verifica en el panel de control para confirmar el pago\n\n"
-                + "O podes seguir mediante el siguiente enlace de manera mas sencilla : \n\n");*/
+                + "O podes seguir mediante el siguiente enlace de manera mas sencilla : \n\n");
                 
         return paymentDao.save(payment);
     }
@@ -92,24 +91,23 @@ public class PaymentService implements IPaymentService{
     }
 
     @Override
-    public Payment setTrue (Long idPayment, Long idLesson){
+    public Payment setTrue (Long idPayment){
         Payment existingPayment = paymentDao.findById(idPayment).orElse(null);
 
         existingPayment.setPayment(true);
-        
-        lessonService.lessQuota(idLesson);
-        
+
         return paymentDao.save(existingPayment);
     }
     
     @Override
-    public Payment setFalse (Long idPayment, Long idLesson){
+    public Payment setFalse (Long idPayment){
         Payment existingPayment = paymentDao.findById(idPayment).orElse(null);
-
-        existingPayment.setPayment(false);
         
-        lessonService.moreQuota(idLesson);
-        
+        if(existingPayment.getPayment() != false){
+            existingPayment.setPayment(false);
+            lessonService.moreQuota(existingPayment.getLesson().getIdLesson());
+        }
+ 
         return paymentDao.save(existingPayment);
     }
 }

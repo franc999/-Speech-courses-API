@@ -44,8 +44,11 @@ public class Payment implements Serializable{
     private MultipartFile file;
        
     @Transient
-    @NotNull
     private String email; 
+    
+    @OneToOne(cascade=CascadeType.ALL)
+    @JoinColumn(name = "id_lesson")
+    private Lesson lesson;
     
     @OneToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "voucher")

@@ -41,12 +41,15 @@ CREATE TABLE publication(id_publication INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
                          date date,
                          id_img INT NULL,
                          FOREIGN KEY (id_img) REFERENCES image (id_image) ON DELETE CASCADE);
-
+drop table payment;
 CREATE TABLE payment(id_payment INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
 					  name VARCHAR(40),
+                      lastname VARCHAR(40),
                       date date,
                       payment boolean,
                       voucher INT NOT NULL,
+                      id_lesson INT NOT NULL,
+                      FOREIGN KEY (id_lesson) REFERENCES lesson (id_lesson) ON DELETE CASCADE,
                       FOREIGN KEY (voucher) REFERENCES image (id_image) ON DELETE CASCADE);
                          
 CREATE TABLE user(id_user INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
@@ -54,6 +57,6 @@ CREATE TABLE user(id_user INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
                   password VARCHAR(164) NOT NULL,
                   enabled BOOLEAN,
                   roles VARCHAR(100) NOT NULL);
-					
+				  
 				  alter table publication add column date date;
                   insert into user (username, password, enabled, roles) values ("manuels", "$2y$12$TnkCvHO5hoMI0lGo4E784e.tkNDXyV8j6sataWlvuMZGtLOl/xjeO", 1, "ROLE_ADMIN");
