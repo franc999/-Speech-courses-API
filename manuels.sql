@@ -49,8 +49,8 @@ CREATE TABLE payment(id_payment INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
                       payment boolean,
                       voucher INT NOT NULL,
                       id_lesson INT NOT NULL,
-                      FOREIGN KEY (id_lesson) REFERENCES lesson (id_lesson) ON DELETE CASCADE,
-                      FOREIGN KEY (voucher) REFERENCES image (id_image) ON DELETE CASCADE);
+                      FOREIGN KEY (id_lesson) REFERENCES lesson (id_lesson),
+                      FOREIGN KEY (voucher) REFERENCES image (id_image));
                          
 CREATE TABLE user(id_user INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
 				  username VARCHAR(40) NOT NULL,

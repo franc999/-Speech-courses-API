@@ -40,13 +40,16 @@ public class Payment implements Serializable{
     @Column(name = "payment")
     private Boolean payment;
     
+    @Column(name = "phone")
+    private String phone;
+    
     @Transient
     private MultipartFile file;
        
     @Transient
     private String email; 
     
-    @OneToOne(cascade=CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "id_lesson")
     private Lesson lesson;
     

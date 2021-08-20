@@ -35,11 +35,10 @@ public class PaymentController {
     @Autowired
     private ImageService imageService;
     
+    @PreAuthorize("permitAll()")
     @PostMapping
     public ResponseEntity<Payment> create(@ModelAttribute Payment payment) throws IOException{
-        
-        System.out.println(payment);
-        
+         
         if(payment.getFile() != null && payment.getEmail() != null){
             Image img = new Image(payment.getFile().getOriginalFilename(),
                             payment.getFile().getContentType(),
@@ -90,13 +89,11 @@ public class PaymentController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Payment> delete(@PathVariable(value = "id") Long idPayment) throws NotFoundException{
 
-        Payment payment = paymentService.findWithId(idPayment);
-
-        if (payment == null) {
+        if (paymentService.findWithId(idPayment) == null) {
             throw new NotFoundException("404 | NO SE ENCUENTRA EL PAGO");
         }
 
-        paymentService.delete(payment);
+        paymentService.delete(idPayment);
         return ResponseEntity.ok().build();
     }
 
@@ -116,6 +113,13 @@ public class PaymentController {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("/decline/{id}")
     public ResponseEntity<Payment> setFalse(@PathVariable(value = "id") Long idPayment){
-        return ResponseEntity.status(HttpStatus.CREATED).body(paymentService.setFalse(idPayment));
+        
+        if (paymentService.findWithId(idPayment) == null) {
+            throw new NotFoundException("404 | NO SE ENCUENTRA EL PAGO");
+        }
+        
+        paymentService.setFalse(idPayment);
+        paymentService.delete(idPayment);
+        return ResponseEntity.ok().build();
     }
 }

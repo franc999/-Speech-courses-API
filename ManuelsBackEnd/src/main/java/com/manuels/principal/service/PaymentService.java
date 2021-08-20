@@ -42,23 +42,23 @@ public class PaymentService implements IPaymentService{
         
         lessonService.lessQuota(payment.getLesson().getIdLesson());
         
-        /*emailService.sendMail(
+        emailService.sendMail(
                 payment.getEmail(),
                 "fnsoftdevmailer@gmail.com", 
                 "\nPago de clase \n" ,
                 payment.getName() + " " +
                 payment.getLastname() + "\n\nPago tu clase, por favor verifica en el panel de control para confirmar el pago\n\n"
-                + "O podes seguir mediante el siguiente enlace de manera mas sencilla : \n\n");*/
+                + "O podes seguir mediante el siguiente enlace de manera mas sencilla : \n\n");
                 
         return paymentDao.save(payment);
     }
 
     @Override
-    public void delete(Payment payment) {
-        paymentDao.delete(payment);
+    public void delete(Long idPayment) {
+        paymentDao.deleteById(idPayment);
     }
 
-    @Override
+    /*@Override
     public Payment update(Payment payment) {
         
         Payment existingPayment = paymentDao.findById(payment.getIdPayment()).orElse(null);
@@ -67,17 +67,16 @@ public class PaymentService implements IPaymentService{
         existingPayment.setImage(payment.getImage());
         existingPayment.setName(payment.getName());
         existingPayment.setPayment(payment.getPayment());
-        
-        /* definir pagos etc */
+
         return existingPayment;
-    }   
+    }
 
     @Override
     public Payment findWithId(Long idPayment) {
         Payment payment = paymentDao.findById(idPayment).orElse(null);
         payment.getImage().setBytes(imageService.decompressBytes(payment.getImage().getBytes()));
         return payment;
-    }
+    }*/
 
     @Override
     public List<Payment> findByName(String name) {
@@ -100,14 +99,9 @@ public class PaymentService implements IPaymentService{
     }
     
     @Override
-    public Payment setFalse (Long idPayment){
+    public void setFalse (Long idPayment){
         Payment existingPayment = paymentDao.findById(idPayment).orElse(null);
-        
-        if(existingPayment.getPayment() != false){
-            existingPayment.setPayment(false);
+        if(existingPayment!=null)
             lessonService.moreQuota(existingPayment.getLesson().getIdLesson());
-        }
- 
-        return paymentDao.save(existingPayment);
     }
 }

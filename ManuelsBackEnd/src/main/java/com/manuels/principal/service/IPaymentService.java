@@ -9,15 +9,15 @@ public interface IPaymentService {
     
     public Payment create(Payment payment);
     
-    public void delete(Payment payment);
+    public void delete(Long idPayment);
     
-    public Payment update(Payment payment);
+    //public Payment update(Payment payment);
 
-    public Payment findWithId(Long idPayment);
+    //public Payment findWithId(Long idPayment);
     
     public List<Payment> findByName(String name); 
     
     public Payment setTrue (Long idPayment);
     
-    public Payment setFalse (Long idPayment);
+    public void setFalse (Long idPayment);
 }
