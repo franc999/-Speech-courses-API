@@ -119,4 +119,16 @@ public class ImageService implements IImageService {
         
         return outputStream.toByteArray();
     }
+    
+    public boolean validateExtension(List<String> permitedFiles, String fileExtension){
+        
+        boolean flag = false;
+        for(String extension : permitedFiles){
+                    System.out.println("EXTENSION : " + extension);
+
+            if(extension.equals(fileExtension))
+                flag = true;
+        }
+        return flag;
+    }
 }
