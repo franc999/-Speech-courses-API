@@ -5,6 +5,9 @@ import com.manuels.principal.models.Payment;
 import com.manuels.principal.models.Image;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,13 +45,17 @@ public class PaymentService implements IPaymentService{
         
         lessonService.lessQuota(payment.getLesson().getIdLesson());
         
-        emailService.sendMail(
-                payment.getEmail(),
-                "fnsoftdevmailer@gmail.com", 
-                "\nPago de clase \n" ,
-                payment.getName() + " " +
-                payment.getLastname() + "\n\nPago tu clase, por favor verifica en el panel de control para confirmar el pago\n\n"
-                + "O podes seguir mediante el siguiente enlace de manera mas sencilla : \n\n");
+        try {
+            emailService.sendMail(
+                    payment.getEmail(),
+                    "fnsoftdevmailer@gmail.com",
+                    "\nPago de clase \n" ,
+                    payment.getName() + " " +
+                            payment.getLastname() + "\n\nPago tu clase, por favor verifica en el panel de control para confirmar el pago\n\n"
+                                    + "O podes seguir mediante el siguiente enlace de manera mas sencilla : \n\n");
+        } catch (MessagingException ex) {
+            Logger.getLogger(PaymentService.class.getName()).log(Level.SEVERE, null, ex);
+        }
                 
         return paymentDao.save(payment);
     }
@@ -58,7 +65,7 @@ public class PaymentService implements IPaymentService{
         paymentDao.deleteById(idPayment);
     }
 
-    /*@Override
+    @Override
     public Payment update(Payment payment) {
         
         Payment existingPayment = paymentDao.findById(payment.getIdPayment()).orElse(null);
@@ -76,7 +83,7 @@ public class PaymentService implements IPaymentService{
         Payment payment = paymentDao.findById(idPayment).orElse(null);
         payment.getImage().setBytes(imageService.decompressBytes(payment.getImage().getBytes()));
         return payment;
-    }*/
+    }
 
     @Override
     public List<Payment> findByName(String name) {

@@ -11,9 +11,9 @@ public interface IPaymentService {
     
     public void delete(Long idPayment);
     
-    //public Payment update(Payment payment);
+    public Payment update(Payment payment);
 
-    //public Payment findWithId(Long idPayment);
+    public Payment findWithId(Long idPayment);
     
     public List<Payment> findByName(String name); 
     
