@@ -9,6 +9,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class PublicationService implements IPublicationService {
@@ -20,6 +21,7 @@ public class PublicationService implements IPublicationService {
     private IPublicationDao publicationDao;
     
     @Override
+    @Transactional(readOnly = true)
     public List<Publication> listPublications() {
         List<Publication> publications = publicationDao.listOrderDate();
         
@@ -67,6 +69,7 @@ public class PublicationService implements IPublicationService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Publication find(Long idPublication) {
         Publication publication = publicationDao.findById(idPublication).orElse(null);
         if(publication.getImage() !=  null)
@@ -75,6 +78,7 @@ public class PublicationService implements IPublicationService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Publication> findByName(String publication) {
         List<Publication> publications = publicationDao.findByName(publication);
         

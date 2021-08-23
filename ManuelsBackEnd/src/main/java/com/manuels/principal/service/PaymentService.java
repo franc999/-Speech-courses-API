@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 import javax.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class PaymentService implements IPaymentService{
@@ -27,6 +28,7 @@ public class PaymentService implements IPaymentService{
     private EmailService emailService;
     
     @Override
+    @Transactional(readOnly = true)
     public List<Payment> listPayments() {
         List<Payment> payments = paymentDao.findAll();
         
@@ -79,6 +81,7 @@ public class PaymentService implements IPaymentService{
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Payment findWithId(Long idPayment) {
         Payment payment = paymentDao.findById(idPayment).orElse(null);
         payment.getImage().setBytes(imageService.decompressBytes(payment.getImage().getBytes()));
@@ -86,6 +89,7 @@ public class PaymentService implements IPaymentService{
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Payment> findByName(String name) {
         List<Payment> payments = paymentDao.findByName(name);
         

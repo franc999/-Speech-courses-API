@@ -33,6 +33,7 @@ public class LessonService implements ILessonService{
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Lesson find(Lesson lesson) {
         return lessonDao.findById(lesson.getIdLesson()).orElse(null);
     }
@@ -55,11 +56,13 @@ public class LessonService implements ILessonService{
     }
     
     @Override
+    @Transactional(readOnly = true)
     public List<Lesson> findByName(String title) {
         return lessonDao.findByName(title);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Lesson findWithId(Long idLesson) {
         return lessonDao.findById(idLesson).orElse(null);    
     }
@@ -76,5 +79,27 @@ public class LessonService implements ILessonService{
         Lesson lesson = findWithId(idLesson);  
         lesson.setQuota(lesson.getQuota() - 1);
         lessonDao.save(lesson);
-    }   
+    }
+    
+    @Override
+    public Lesson createDiscount(Lesson lesson){
+        Lesson existingLesson = lessonDao.findById(lesson.getIdLesson()).orElse(null);
+        if(existingLesson != null){
+            existingLesson.generateCode(10);
+            existingLesson.setDiscountLink(lesson.getDiscountLink());
+        }
+        return lessonDao.save(existingLesson);
+    }
+    
+    @Override
+    public boolean verifyDiscount(String discount, Long idLesson){
+        Lesson lesson = lessonDao.findById(idLesson).orElse(null);
+        boolean flag = false;
+        if(lesson != null){
+            if(lesson.getCode().equals(discount)){
+                flag=true;
+            }
+        }
+        return flag;
+    }
 }

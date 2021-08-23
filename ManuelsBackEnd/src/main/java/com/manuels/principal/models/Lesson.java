@@ -54,10 +54,36 @@ public class Lesson implements Serializable{
     @Column(name = "link1")
     private String link1;
     
+    @Column(name = "discount_link")
+    private String discountLink;
+    
+    @Column(name = "code")
+    private String code;
+    
     @ManyToMany
     @JoinTable(name="lesson_dates"
               ,joinColumns=@JoinColumn(name="fk_lesson")
               ,inverseJoinColumns=@JoinColumn(name="fk_date")
               )
     private List<DateC> dates;
+    
+    public void generateCode(int n){
+  
+        String AlphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                                    + "0123456789"
+                                    + "abcdefghijklmnopqrstuvxyz";
+
+        StringBuilder sb = new StringBuilder(n);
+  
+        for (int i = 0; i < n; i++) {
+  
+            int index
+                = (int)(AlphaNumericString.length()
+                        * Math.random());
+  
+            sb.append(AlphaNumericString
+                          .charAt(index));
+        }
+        setCode(sb.toString());
+    }
 }

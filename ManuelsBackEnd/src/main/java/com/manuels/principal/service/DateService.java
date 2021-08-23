@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class DateService implements IDateService {
@@ -15,6 +16,7 @@ public class DateService implements IDateService {
     private IDateDao dateDao;
     
     @Override
+    @Transactional(readOnly = true)
     public List<DateC> listDates() {
         return dateDao.findAll();
     }
@@ -30,6 +32,7 @@ public class DateService implements IDateService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public DateC find(Long idDate) {
         return dateDao.findById(idDate).orElse(null);
     }

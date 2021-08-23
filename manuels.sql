@@ -10,7 +10,9 @@ CREATE TABLE lesson (id_lesson INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
                      teacher VARCHAR(60) NOT NULL,
                      duration VARCHAR(150) NOT NULL,
                      link VARCHAR(150),
-                     link1 VARCHAR(150));
+                     link1 VARCHAR(150),
+                     descountLink VARCHAR(150),
+                     code VARCHAR(10));
                      
 CREATE TABLE date(id_date INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
 				  date DATE);
@@ -41,7 +43,7 @@ CREATE TABLE publication(id_publication INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
                          date date,
                          id_img INT NULL,
                          FOREIGN KEY (id_img) REFERENCES image (id_image) ON DELETE CASCADE);
-drop table payment;
+
 CREATE TABLE payment(id_payment INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
 					  name VARCHAR(40),
                       lastname VARCHAR(40),
@@ -59,5 +61,9 @@ CREATE TABLE user(id_user INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
                   enabled BOOLEAN,
                   roles VARCHAR(100) NOT NULL);
 				  
-				  alter table publication add column date date;
                   insert into user (username, password, enabled, roles) values ("manuels", "$2y$12$TnkCvHO5hoMI0lGo4E784e.tkNDXyV8j6sataWlvuMZGtLOl/xjeO", 1, "ROLE_ADMIN");
+   
+                   alter table lesson add column discount_link VARCHAR(150);
+                   alter table lesson add column code VARCHAR(10);
+                  /*alter table publication add column date date;*/
+				
