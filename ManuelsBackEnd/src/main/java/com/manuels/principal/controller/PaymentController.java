@@ -38,7 +38,7 @@ public class PaymentController {
     @PreAuthorize("permitAll()")
     @PostMapping
     public ResponseEntity<Payment> create(@ModelAttribute Payment payment) throws IOException{
-         
+         System.out.println(payment);
         if(payment.getFile() != null && payment.getEmail() != null){
             Image img = new Image(payment.getFile().getOriginalFilename(),
                             payment.getFile().getContentType(),
@@ -47,6 +47,7 @@ public class PaymentController {
             payment.setImage(img);
             payment.setDate(LocalDate.now());
             payment.setPayment(Boolean.FALSE); 
+            payment.setDateLesson(payment.getDateSelected());
         }else{
             throw new BadRequestException("No ingresaste un comprobante");
         }

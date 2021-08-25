@@ -1,6 +1,7 @@
 package com.manuels.principal.service;
 
 import com.manuels.principal.dao.ILessonDao;
+import com.manuels.principal.models.Discounts;
 import com.manuels.principal.models.Lesson;
 
 import java.util.List;
@@ -16,6 +17,9 @@ public class LessonService implements ILessonService{
     @Autowired
     private ILessonDao lessonDao;
     
+    @Autowired
+    private DiscountsService discountsService;
+    
     @Override
     @Transactional(readOnly = true)
     public List<Lesson> listLessons() {
@@ -24,6 +28,7 @@ public class LessonService implements ILessonService{
 
     @Override
     public Lesson create(Lesson lesson) {
+
         return lessonDao.save(lesson);
     }
 
@@ -85,21 +90,28 @@ public class LessonService implements ILessonService{
     public Lesson createDiscount(Lesson lesson){
         Lesson existingLesson = lessonDao.findById(lesson.getIdLesson()).orElse(null);
         if(existingLesson != null){
-            existingLesson.generateCode(10);
+                    
+            Discounts discount = new Discounts();
+            discount.setCode(lesson.getCode());
+            discount.setLesson(lesson);
+
+            discountsService.create(discount);
+        
             existingLesson.setDiscountLink(lesson.getDiscountLink());
         }
         return lessonDao.save(existingLesson);
     }
     
     @Override
-    public boolean verifyDiscount(String discount, Long idLesson){
-        Lesson lesson = lessonDao.findById(idLesson).orElse(null);
+    public boolean verifyDiscount(Discounts discount){
+       /* Lesson lesson = lessonDao.findById(idLesson).orElse(null);
+        
+        if(lesson != null){*/
         boolean flag = false;
-        if(lesson != null){
-            if(lesson.getCode().equals(discount)){
+            List<Discounts> discounts = discountsService.findByCode(discount.getCode());
+            if(!discounts.isEmpty()){
                 flag=true;
             }
-        }
         return flag;
     }
 }

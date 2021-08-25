@@ -3,8 +3,10 @@ package com.manuels.principal.controller;
 import com.manuels.principal.exceptions.NotFoundException;
 import com.manuels.principal.models.DateC;
 import com.manuels.principal.models.DiscountUtil;
+import com.manuels.principal.models.Discounts;
 import com.manuels.principal.models.Lesson;
 import com.manuels.principal.service.DateService;
+import com.manuels.principal.service.DiscountsService;
 import com.manuels.principal.service.LessonService;
 
 import java.util.ArrayList;
@@ -112,9 +114,9 @@ public class LessonController {
     }
     
     @PostMapping("/discounts/compares")
-    public ResponseEntity<Lesson> verifyDiscount(@RequestBody DiscountUtil discountUtil) throws Exception{
+    public ResponseEntity<Lesson> verifyDiscount(@RequestBody Discounts discount) throws Exception{
         
-        boolean flag = lessonService.verifyDiscount(discountUtil.getDiscount(), discountUtil.getIdLesson());
+        boolean flag = lessonService.verifyDiscount(discount);
         
         if(flag!= true){
             throw new Exception("El codigo ingresado es incorrecto");

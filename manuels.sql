@@ -11,8 +11,7 @@ CREATE TABLE lesson (id_lesson INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
                      duration VARCHAR(150) NOT NULL,
                      link VARCHAR(150),
                      link1 VARCHAR(150),
-                     descountLink VARCHAR(150),
-                     code VARCHAR(10));
+                     descountLink VARCHAR(150));
                      
 CREATE TABLE date(id_date INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
 				  date DATE);
@@ -52,6 +51,7 @@ CREATE TABLE payment(id_payment INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
                       phone VARCHAR(40),
                       voucher INT NOT NULL,
                       id_lesson INT NOT NULL,
+                      date_lesson date,
                       FOREIGN KEY (id_lesson) REFERENCES lesson (id_lesson),
                       FOREIGN KEY (voucher) REFERENCES image (id_image));
                          
@@ -60,9 +60,15 @@ CREATE TABLE user(id_user INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
                   password VARCHAR(164) NOT NULL,
                   enabled BOOLEAN,
                   roles VARCHAR(100) NOT NULL);
-				  
+
+drop table discounts;
+CREATE TABLE discounts(id_discount INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+					   id_less INT NOT NULL,
+                       code VARCHAR(10) NOT NULL,
+                       FOREIGN KEY (id_less) REFERENCES lesson (id_lesson));
+
                   insert into user (username, password, enabled, roles) values ("manuels", "$2y$12$TnkCvHO5hoMI0lGo4E784e.tkNDXyV8j6sataWlvuMZGtLOl/xjeO", 1, "ROLE_ADMIN");
-   
+                   alter table payment add column date_lesson date;
                    alter table lesson add column discount_link VARCHAR(150);
                    alter table lesson add column code VARCHAR(10);
                   /*alter table publication add column date date;*/

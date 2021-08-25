@@ -67,6 +67,8 @@ public class LessonServiceTest {
         lesson.setQuota(50);
         lesson.setLink("www.google.com");
         lesson.setLink1("www.google.com");
+        lesson.setDiscountLink("lalala");
+        lesson.setCode("alala");
         
         lesson1.setDates(dates);
         lesson1.setDescription("sssfffasda");
@@ -78,6 +80,8 @@ public class LessonServiceTest {
         lesson1.setQuota(40);
         lesson1.setLink("www.google.com");
         lesson1.setLink1("www.google.com");
+        lesson1.setDiscountLink("lalala");
+        lesson1.setCode("alala");
         
         List<Lesson>lessons = new ArrayList();
         lessons.add(lesson);
@@ -111,6 +115,8 @@ public class LessonServiceTest {
         lesson.setQuota(50);
         lesson.setLink("www.google.com");
         lesson.setLink1("www.google.com");
+        lesson.setDiscountLink("lalala");
+        lesson.setCode("alala");
         
         given(lessonMock.save(lesson)).willAnswer
         (invocation -> invocation.getArgument(0));
@@ -143,7 +149,8 @@ public class LessonServiceTest {
         lesson.setQuota(50);
         lesson.setLink("www.google.com");
         lesson.setLink1("www.google.com");
-
+        lesson.setDiscountLink("lalala");
+        lesson.setCode("alala");
         
         given(lessonMock.findById(lesson.getIdLesson()))
                 .willReturn(Optional.of(lesson));
@@ -172,6 +179,8 @@ public class LessonServiceTest {
         lesson.setQuota(50);
         lesson.setLink("www.google.com");
         lesson.setLink1("www.google.com");
+        lesson.setDiscountLink("lalala");
+        lesson.setCode("alala");
         
         String title = "title";
         
@@ -203,6 +212,8 @@ public class LessonServiceTest {
         lesson.setQuota(50);
         lesson.setLink("www.google.com");
         lesson.setLink1("www.google.com");
+        lesson.setDiscountLink("lalala");
+        lesson.setCode("alala");
         
         lessonService.delete(lesson);
         lessonService.delete(lesson);

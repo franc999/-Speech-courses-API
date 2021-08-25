@@ -1,5 +1,6 @@
 package com.manuels.principal.service;
 
+import com.manuels.principal.models.Discounts;
 import com.manuels.principal.models.Lesson;
 import java.util.List;
 
@@ -25,5 +26,5 @@ public interface ILessonService {
     
     public Lesson createDiscount(Lesson lesson);
     
-    public boolean verifyDiscount(String discount, Long idLesson);
+    public boolean verifyDiscount(Discounts discount);
 }

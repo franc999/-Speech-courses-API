@@ -2,6 +2,7 @@ package com.manuels.principal.models;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -48,6 +49,12 @@ public class Payment implements Serializable{
        
     @Transient
     private String email; 
+
+    @Transient
+    private Date dateSelected;
+    
+    @Column(name = "date_lesson")
+    private Date dateLesson;
     
     @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "id_lesson")

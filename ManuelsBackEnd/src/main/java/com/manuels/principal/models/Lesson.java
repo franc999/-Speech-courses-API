@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import lombok.Data;
 
 @JsonInclude
@@ -57,7 +58,7 @@ public class Lesson implements Serializable{
     @Column(name = "discount_link")
     private String discountLink;
     
-    @Column(name = "code")
+    @Transient
     private String code;
     
     @ManyToMany
@@ -66,24 +67,4 @@ public class Lesson implements Serializable{
               ,inverseJoinColumns=@JoinColumn(name="fk_date")
               )
     private List<DateC> dates;
-    
-    public void generateCode(int n){
-  
-        String AlphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                                    + "0123456789"
-                                    + "abcdefghijklmnopqrstuvxyz";
-
-        StringBuilder sb = new StringBuilder(n);
-  
-        for (int i = 0; i < n; i++) {
-  
-            int index
-                = (int)(AlphaNumericString.length()
-                        * Math.random());
-  
-            sb.append(AlphaNumericString
-                          .charAt(index));
-        }
-        setCode(sb.toString());
-    }
 }
