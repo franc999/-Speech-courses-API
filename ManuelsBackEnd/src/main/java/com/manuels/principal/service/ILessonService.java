@@ -24,7 +24,7 @@ public interface ILessonService {
     
     public void lessQuota(Long idLesson); 
     
-    public Lesson createDiscount(Lesson lesson);
+    /*public Lesson createDiscount(Lesson lesson);
     
-    public boolean verifyDiscount(Discounts discount);
+    public boolean verifyDiscount(Discounts discount);*/
 }

@@ -30,8 +30,4 @@ public class Discounts {
     
     @Column(name = "code")
     private String code;
-    
-    @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "id_less")
-    private Lesson lesson;
 }

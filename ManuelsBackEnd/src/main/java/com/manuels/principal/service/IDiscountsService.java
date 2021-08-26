@@ -15,5 +15,7 @@ public interface IDiscountsService {
     
     public Discounts findWithId(Long idDiscounts);
     
+    public boolean verifyDiscount(Discounts discount);
+    
     public List<Discounts> findByCode(String code); 
 }

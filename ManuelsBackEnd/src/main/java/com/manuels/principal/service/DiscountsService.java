@@ -37,11 +37,21 @@ public class DiscountsService implements IDiscountsService{
         Discounts existingDiscount = discountsDao.findById(discount.getIdDiscounts()).orElse(null);
         
         existingDiscount.setCode(discount.getCode());
-        existingDiscount.setLesson(discount.getLesson());
-        
+
         return discountsDao.save(existingDiscount);
     }
+    
+    @Override
+    public boolean verifyDiscount(Discounts discount){
 
+        boolean flag = false;
+            List<Discounts> discounts = discountsDao.findByCode(discount.getCode());
+            if(!discounts.isEmpty()){
+                flag=true;
+            }
+        return flag;
+    }
+    
     @Override
     @Transactional(readOnly = true)
     public Discounts findWithId(Long idDiscounts) {

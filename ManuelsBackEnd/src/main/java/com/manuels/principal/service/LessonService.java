@@ -86,7 +86,7 @@ public class LessonService implements ILessonService{
         lessonDao.save(lesson);
     }
     
-    @Override
+    /*@Override
     public Lesson createDiscount(Lesson lesson){
         Lesson existingLesson = lessonDao.findById(lesson.getIdLesson()).orElse(null);
         if(existingLesson != null){
@@ -106,12 +106,12 @@ public class LessonService implements ILessonService{
     public boolean verifyDiscount(Discounts discount){
        /* Lesson lesson = lessonDao.findById(idLesson).orElse(null);
         
-        if(lesson != null){*/
+        if(lesson != null){
         boolean flag = false;
             List<Discounts> discounts = discountsService.findByCode(discount.getCode());
             if(!discounts.isEmpty()){
                 flag=true;
             }
         return flag;
-    }
+    }*/
 }

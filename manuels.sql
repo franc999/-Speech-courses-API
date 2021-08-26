@@ -63,9 +63,7 @@ CREATE TABLE user(id_user INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
 
 drop table discounts;
 CREATE TABLE discounts(id_discount INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
-					   id_less INT NOT NULL,
-                       code VARCHAR(10) NOT NULL,
-                       FOREIGN KEY (id_less) REFERENCES lesson (id_lesson));
+                       code VARCHAR(10) NOT NULL);
 
                   insert into user (username, password, enabled, roles) values ("manuels", "$2y$12$TnkCvHO5hoMI0lGo4E784e.tkNDXyV8j6sataWlvuMZGtLOl/xjeO", 1, "ROLE_ADMIN");
                    alter table payment add column date_lesson date;
