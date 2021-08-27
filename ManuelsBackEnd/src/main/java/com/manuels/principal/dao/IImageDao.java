@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 public interface IImageDao extends JpaRepository<Image, Long>{
-    @Query(value = "SELECT *FROM image WHERE name LIKE %?1%", nativeQuery = true)
+    @Query(value = "SELECT *FROM image WHERE name LIKE ?1", nativeQuery = true)
     List<Image> findByName(String name);
 }

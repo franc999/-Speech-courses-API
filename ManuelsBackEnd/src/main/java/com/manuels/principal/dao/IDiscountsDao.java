@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 public interface IDiscountsDao extends JpaRepository<Discounts, Long>{
-    @Query(value = "SELECT *FROM discounts WHERE code LIKE %?1%", nativeQuery = true)
+    @Query(value = "SELECT *FROM discounts WHERE code LIKE ?1", nativeQuery = true)
     public List<Discounts> findByCode(String code);
 }
