@@ -2,8 +2,11 @@ package com.manuels.principal.controller;
 
 import com.manuels.principal.exceptions.NotFoundException;
 import com.manuels.principal.models.DateC;
+import com.manuels.principal.models.DiscountUtil;
+import com.manuels.principal.models.Discounts;
 import com.manuels.principal.models.Lesson;
 import com.manuels.principal.service.DateService;
+import com.manuels.principal.service.DiscountsService;
 import com.manuels.principal.service.LessonService;
 
 import java.util.ArrayList;
@@ -12,6 +15,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import static org.springframework.http.ResponseEntity.ok;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -102,4 +106,21 @@ public class LessonController {
 
         return ResponseEntity.status(HttpStatus.CREATED).body(lessonService.update(lesson));
     }
+    
+    /*@PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PostMapping("/discounts")
+    public ResponseEntity<Lesson> createDiscount(@RequestBody Lesson lesson){
+        return ResponseEntity.status(HttpStatus.CREATED).body(lessonService.createDiscount(lesson));
+    }
+    
+    @PostMapping("/discounts/compares")
+    public ResponseEntity<Lesson> verifyDiscount(@RequestBody Discounts discount) throws Exception{
+        
+        boolean flag = lessonService.verifyDiscount(discount);
+        
+        if(flag!= true){
+            throw new Exception("El codigo ingresado es incorrecto");
+        }
+        return ResponseEntity.ok().build();
+    }*/
 }

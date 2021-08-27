@@ -13,6 +13,7 @@ import java.util.zip.DataFormatException;
 import java.util.zip.Deflater;
 import java.util.zip.Inflater;
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class ImageService implements IImageService {
@@ -21,6 +22,7 @@ public class ImageService implements IImageService {
     private IImageDao imageDao;
 
     @Override
+    @Transactional(readOnly = true)
     public List<Image> listImages() {
         
         List<Image> images = imageDao.findAll();
@@ -54,6 +56,7 @@ public class ImageService implements IImageService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Image find(Long idImage) {
         Image image = imageDao.findById(idImage).orElse(null);
 
@@ -64,6 +67,7 @@ public class ImageService implements IImageService {
     }
     
     @Override
+    @Transactional(readOnly = true)
     public List<Image> findByName(String imageName) {
         
         List<Image> images = imageDao.findByName(imageName);
@@ -118,5 +122,17 @@ public class ImageService implements IImageService {
         }
         
         return outputStream.toByteArray();
+    }
+    
+    public boolean validateExtension(List<String> permitedFiles, String fileExtension){
+        
+        boolean flag = false;
+        for(String extension : permitedFiles){
+                    System.out.println("EXTENSION : " + extension);
+
+            if(extension.equals(fileExtension))
+                flag = true;
+        }
+        return flag;
     }
 }

@@ -5,6 +5,7 @@ import com.manuels.principal.models.Review;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class ReviewService implements IReviewService{
@@ -13,6 +14,7 @@ public class ReviewService implements IReviewService{
     private IReviewDao reviewDao;
     
     @Override
+    @Transactional(readOnly = true)
     public List<Review> listReviews() {
         return reviewDao.findAll();
     }
@@ -39,6 +41,7 @@ public class ReviewService implements IReviewService{
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Review find(Long idReview) {
         return reviewDao.findById(idReview).orElse(null);
     } 

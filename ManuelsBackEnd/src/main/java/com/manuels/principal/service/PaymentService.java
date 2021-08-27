@@ -4,8 +4,12 @@ import com.manuels.principal.dao.IPaymentDao;
 import com.manuels.principal.models.Payment;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class PaymentService implements IPaymentService{
@@ -14,18 +18,50 @@ public class PaymentService implements IPaymentService{
     private IPaymentDao paymentDao;
     
     @Override
+    @Transactional(readOnly = true)
     public List<Payment> listPayments() {
+<<<<<<< HEAD
         return paymentDao.findAll();
+=======
+        List<Payment> payments = paymentDao.findAll();
+        
+        payments.forEach(p -> {
+            p.getImage().setBytes(imageService.decompressBytes(p.getImage().getBytes()));
+        });
+        
+        return payments;
+>>>>>>> das
     }
 
     @Override
     public Payment create(Payment payment) {
+<<<<<<< HEAD
+=======
+        
+        Image image = imageService.create(payment.getImage());
+        payment.setImage(image);
+        
+        lessonService.lessQuota(payment.getLesson().getIdLesson());
+        
+        try {
+            emailService.sendMail(
+                    payment.getEmail(),
+                    "fnsoftdevmailer@gmail.com",
+                    "\nPago de clase \n" ,
+                    payment.getName() + " " +
+                            payment.getLastname() + "\n\nPago tu clase, por favor verifica en el panel de control para confirmar el pago\n\n"
+                                    + "O podes seguir mediante el siguiente enlace de manera mas sencilla : \n\n");
+        } catch (MessagingException ex) {
+            Logger.getLogger(PaymentService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                
+>>>>>>> das
         return paymentDao.save(payment);
     }
 
     @Override
-    public void delete(Payment payment) {
-        paymentDao.delete(payment);
+    public void delete(Long idPayment) {
+        paymentDao.deleteById(idPayment);
     }
 
     @Override
@@ -37,18 +73,45 @@ public class PaymentService implements IPaymentService{
         existingPayment.setImage(payment.getImage());
         existingPayment.setName(payment.getName());
         existingPayment.setPayment(payment.getPayment());
-        
-        /* definir pagos etc */
+
         return existingPayment;
-    }   
+    }
 
     @Override
+    @Transactional(readOnly = true)
     public Payment findWithId(Long idPayment) {
         return paymentDao.findById(idPayment).orElse(null);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Payment> findByName(String name) {
+<<<<<<< HEAD
         return paymentDao.findByName(name);
+=======
+        List<Payment> payments = paymentDao.findByName(name);
+        
+        payments.forEach(p -> {
+            p.getImage().setBytes(imageService.decompressBytes(p.getImage().getBytes()));
+        });
+        
+        return payments;
+    }
+
+    @Override
+    public Payment setTrue (Long idPayment){
+        Payment existingPayment = paymentDao.findById(idPayment).orElse(null);
+
+        existingPayment.setPayment(true);
+
+        return paymentDao.save(existingPayment);
+    }
+    
+    @Override
+    public void setFalse (Long idPayment){
+        Payment existingPayment = paymentDao.findById(idPayment).orElse(null);
+        if(existingPayment!=null)
+            lessonService.moreQuota(existingPayment.getLesson().getIdLesson());
+>>>>>>> das
     }
 }

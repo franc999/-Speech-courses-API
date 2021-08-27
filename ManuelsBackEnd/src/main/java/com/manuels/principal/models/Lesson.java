@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import lombok.Data;
 
 @JsonInclude
@@ -53,6 +54,12 @@ public class Lesson implements Serializable{
     
     @Column(name = "link1")
     private String link1;
+    
+    @Column(name = "discount_link")
+    private String discountLink;
+    
+    @Transient
+    private String code;
     
     @ManyToMany
     @JoinTable(name="lesson_dates"

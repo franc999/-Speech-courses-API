@@ -1,11 +1,13 @@
 package com.manuels.principal.controller;
 
+import com.manuels.principal.exceptions.BadRequestException;
 import com.manuels.principal.exceptions.NotFoundException;
 import com.manuels.principal.models.Publication;
 import com.manuels.principal.models.Image;
 import com.manuels.principal.service.ImageService;
 import com.manuels.principal.service.PublicationService;
 import java.io.IOException;
+import java.time.LocalDate;
 
 import java.util.List;
 
@@ -24,9 +26,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
 @RequestMapping("/api/publications")
 @RestController
@@ -41,28 +41,22 @@ public class PublicationController {
     
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping
-    public ResponseEntity<Publication> create(@ModelAttribute Publication publication) throws NotFoundException, IOException{
+    public ResponseEntity<Publication> create(@ModelAttribute Publication publication) throws IOException{
         
-        //System.out.println("IMAGEN DEL FRONT ---------"+publication.getFile());
-        
-        Image img = new Image(publication.getFile().getOriginalFilename(),
+        if(publication.getFile() != null){
+            Image img = new Image(publication.getFile().getOriginalFilename(),
                               publication.getFile().getContentType(),
                               imageService.compressBytes(publication.getFile().getBytes()));
+
+            publication.setImage(img);
+        }
         
-        //System.out.println("IMAGEN CONVERTIDA ---------"+img);
-        
-        publication.setImage(img);
-        
+        System.out.println(LocalDate.now());
+        publication.setDate(LocalDate.now());
+
         return ResponseEntity.status(HttpStatus.CREATED).body(publicationService.create(publication));
     }
-    
-    /*@PreAuthorize("hasRole('ROLE_ADMIN')")
-    @PostMapping
-    public ResponseEntity<Publication> create(@RequestBody Publication publication) throws NotFoundException{
-        
-        return ResponseEntity.status(HttpStatus.CREATED).body(publicationService.create(publication));
-    }*/
-    
+
     @GetMapping
     public List<Publication> listAll(){
         return publicationService.listPublications();

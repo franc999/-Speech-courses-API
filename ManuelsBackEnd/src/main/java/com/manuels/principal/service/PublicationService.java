@@ -9,6 +9,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class PublicationService implements IPublicationService {
@@ -20,11 +21,13 @@ public class PublicationService implements IPublicationService {
     private IPublicationDao publicationDao;
     
     @Override
+    @Transactional(readOnly = true)
     public List<Publication> listPublications() {
-        List<Publication> publications = publicationDao.findAll();
+        List<Publication> publications = publicationDao.listOrderDate();
         
         publications.forEach(p -> {
-            p.getImage().setBytes(imageService.decompressBytes(p.getImage().getBytes()));
+            if(p.getImage() !=  null)
+                p.getImage().setBytes(imageService.decompressBytes(p.getImage().getBytes()));
         });
         
         return publications;
@@ -66,12 +69,24 @@ public class PublicationService implements IPublicationService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Publication find(Long idPublication) {
-        return publicationDao.findById(idPublication).orElse(null);
+        Publication publication = publicationDao.findById(idPublication).orElse(null);
+        if(publication.getImage() !=  null)
+                publication.getImage().setBytes(imageService.decompressBytes(publication.getImage().getBytes()));
+        return publication;
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Publication> findByName(String publication) {
-        return publicationDao.findByName(publication);
+        List<Publication> publications = publicationDao.findByName(publication);
+        
+        publications.forEach(p -> {
+            if(p.getImage() !=  null)
+                p.getImage().setBytes(imageService.decompressBytes(p.getImage().getBytes()));
+        });
+        
+        return publications;
     }
 }

@@ -2,6 +2,7 @@ package com.manuels.principal.models;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -28,12 +29,40 @@ public class Payment implements Serializable{
     @Column(name = "name")
     private String name;
     
+<<<<<<< HEAD
+=======
+    @Column(name = "lastname")
+    private String lastname;
+    
+>>>>>>> das
     @Column(name = "date")
     private LocalDate date;
     
     @Column(name = "payment")
     private Boolean payment;
     
+<<<<<<< HEAD
+=======
+    @Column(name = "phone")
+    private String phone;
+    
+    @Transient
+    private MultipartFile file;
+       
+    @Transient
+    private String email; 
+
+    @Transient
+    private Date dateSelected;
+    
+    @Column(name = "date_lesson")
+    private Date dateLesson;
+    
+    @OneToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "id_lesson")
+    private Lesson lesson;
+    
+>>>>>>> das
     @OneToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "voucher")
     private Image image;

@@ -1,5 +1,6 @@
 package com.manuels.principal.controller;
 
+import com.manuels.principal.exceptions.BadRequestException;
 import com.manuels.principal.exceptions.NotFoundException;
 import com.manuels.principal.service.PaymentService;
 import com.manuels.principal.models.Payment;
@@ -31,7 +32,9 @@ public class PaymentController {
     @Autowired
     private ImageService imageService;
     
+    @PreAuthorize("permitAll()")
     @PostMapping
+<<<<<<< HEAD
     public ResponseEntity<Payment> create(@RequestBody Payment payment){
         
         if(payment.getImage() != null){
@@ -45,6 +48,23 @@ public class PaymentController {
         }else{
             throw new Error("Tenes que ingresar el comprobante");
         }
+=======
+    public ResponseEntity<Payment> create(@ModelAttribute Payment payment) throws IOException{
+         System.out.println(payment);
+        if(payment.getFile() != null && payment.getEmail() != null){
+            Image img = new Image(payment.getFile().getOriginalFilename(),
+                            payment.getFile().getContentType(),
+            imageService.compressBytes(payment.getFile().getBytes()));
+            
+            payment.setImage(img);
+            payment.setDate(LocalDate.now());
+            payment.setPayment(Boolean.FALSE); 
+            payment.setDateLesson(payment.getDateSelected());
+        }else{
+            throw new BadRequestException("No ingresaste un comprobante");
+        }
+   
+>>>>>>> das
         return ResponseEntity.status(HttpStatus.CREATED).body(paymentService.create(payment));
     }
     
@@ -83,13 +103,11 @@ public class PaymentController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Payment> delete(@PathVariable(value = "id") Long idPayment) throws NotFoundException{
 
-        Payment payment = paymentService.findWithId(idPayment);
-
-        if (payment == null) {
+        if (paymentService.findWithId(idPayment) == null) {
             throw new NotFoundException("404 | NO SE ENCUENTRA EL PAGO");
         }
 
-        paymentService.delete(payment);
+        paymentService.delete(idPayment);
         return ResponseEntity.ok().build();
     }
 
@@ -99,4 +117,27 @@ public class PaymentController {
 
         return ResponseEntity.status(HttpStatus.CREATED).body(paymentService.update(payment));
     }
+<<<<<<< HEAD
 }
+=======
+    
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PutMapping("/accept/{id}")
+    public ResponseEntity<Payment> setTrue(@PathVariable(value = "id") Long idPayment){
+        return ResponseEntity.status(HttpStatus.CREATED).body(paymentService.setTrue(idPayment));
+    }
+    
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PutMapping("/decline/{id}")
+    public ResponseEntity<Payment> setFalse(@PathVariable(value = "id") Long idPayment){
+        
+        if (paymentService.findWithId(idPayment) == null) {
+            throw new NotFoundException("404 | NO SE ENCUENTRA EL PAGO");
+        }
+        
+        paymentService.setFalse(idPayment);
+        paymentService.delete(idPayment);
+        return ResponseEntity.ok().build();
+    }
+}
+>>>>>>> das
