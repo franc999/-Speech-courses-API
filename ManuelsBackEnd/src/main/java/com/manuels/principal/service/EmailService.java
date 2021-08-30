@@ -18,18 +18,11 @@ public class EmailService {
         
         MimeMessage message = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
-        
-<<<<<<< HEAD
-        mailMessage.setFrom(from);
-        mailMessage.setTo(to);
-        mailMessage.setSubject(subject);
-        mailMessage.setText("BIENVENIDO A CURSOS MANUELS");
-=======
+
         helper.setFrom(from);
         helper.setTo(to);
         helper.setText(body);
->>>>>>> das
-        
+
         javaMailSender.send(message);
     }
 }

@@ -71,8 +71,6 @@ public class LessonService implements ILessonService{
     public Lesson findWithId(Long idLesson) {
         return lessonDao.findById(idLesson).orElse(null);    
     }
-<<<<<<< HEAD
-=======
 
     @Override
     public void moreQuota(Long idLesson) {
@@ -116,5 +114,4 @@ public class LessonService implements ILessonService{
             }
         return flag;
     }*/
->>>>>>> das
 }

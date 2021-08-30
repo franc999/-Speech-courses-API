@@ -2,6 +2,7 @@ package com.manuels.principal.service;
 
 import com.manuels.principal.dao.IPaymentDao;
 import com.manuels.principal.models.Payment;
+import com.manuels.principal.models.Image;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.logging.Level;
@@ -17,12 +18,19 @@ public class PaymentService implements IPaymentService{
     @Autowired
     private IPaymentDao paymentDao;
     
+    @Autowired
+    private ImageService imageService;
+    
+    @Autowired
+    private EmailService emailService;
+    
+    @Autowired
+    private LessonService lessonService;
+    
     @Override
     @Transactional(readOnly = true)
     public List<Payment> listPayments() {
-<<<<<<< HEAD
-        return paymentDao.findAll();
-=======
+
         List<Payment> payments = paymentDao.findAll();
         
         payments.forEach(p -> {
@@ -30,14 +38,11 @@ public class PaymentService implements IPaymentService{
         });
         
         return payments;
->>>>>>> das
     }
 
     @Override
     public Payment create(Payment payment) {
-<<<<<<< HEAD
-=======
-        
+
         Image image = imageService.create(payment.getImage());
         payment.setImage(image);
         
@@ -55,7 +60,6 @@ public class PaymentService implements IPaymentService{
             Logger.getLogger(PaymentService.class.getName()).log(Level.SEVERE, null, ex);
         }
                 
->>>>>>> das
         return paymentDao.save(payment);
     }
 
@@ -86,9 +90,7 @@ public class PaymentService implements IPaymentService{
     @Override
     @Transactional(readOnly = true)
     public List<Payment> findByName(String name) {
-<<<<<<< HEAD
-        return paymentDao.findByName(name);
-=======
+
         List<Payment> payments = paymentDao.findByName(name);
         
         payments.forEach(p -> {
@@ -112,6 +114,5 @@ public class PaymentService implements IPaymentService{
         Payment existingPayment = paymentDao.findById(idPayment).orElse(null);
         if(existingPayment!=null)
             lessonService.moreQuota(existingPayment.getLesson().getIdLesson());
->>>>>>> das
     }
 }

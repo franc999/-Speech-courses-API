@@ -12,7 +12,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
 
 @Data
 @Entity
@@ -29,20 +31,15 @@ public class Payment implements Serializable{
     @Column(name = "name")
     private String name;
     
-<<<<<<< HEAD
-=======
     @Column(name = "lastname")
     private String lastname;
     
->>>>>>> das
     @Column(name = "date")
     private LocalDate date;
     
     @Column(name = "payment")
     private Boolean payment;
     
-<<<<<<< HEAD
-=======
     @Column(name = "phone")
     private String phone;
     
@@ -62,7 +59,6 @@ public class Payment implements Serializable{
     @JoinColumn(name = "id_lesson")
     private Lesson lesson;
     
->>>>>>> das
     @OneToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "voucher")
     private Image image;

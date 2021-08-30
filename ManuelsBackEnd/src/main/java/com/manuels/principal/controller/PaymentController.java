@@ -6,6 +6,8 @@ import com.manuels.principal.service.PaymentService;
 import com.manuels.principal.models.Payment;
 import com.manuels.principal.models.Image;
 import com.manuels.principal.service.ImageService;
+import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,6 +16,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -32,23 +35,6 @@ public class PaymentController {
     @Autowired
     private ImageService imageService;
     
-    @PreAuthorize("permitAll()")
-    @PostMapping
-<<<<<<< HEAD
-    public ResponseEntity<Payment> create(@RequestBody Payment payment){
-        
-        if(payment.getImage() != null){
-            
-           Image image = imageService.create(payment.getImage());
-           if(image.getIdImage() != null){
-               payment.setImage(image);
-           }else{
-               throw new Error("Error inesperado al ingresar la imagen");
-           }
-        }else{
-            throw new Error("Tenes que ingresar el comprobante");
-        }
-=======
     public ResponseEntity<Payment> create(@ModelAttribute Payment payment) throws IOException{
          System.out.println(payment);
         if(payment.getFile() != null && payment.getEmail() != null){
@@ -64,7 +50,6 @@ public class PaymentController {
             throw new BadRequestException("No ingresaste un comprobante");
         }
    
->>>>>>> das
         return ResponseEntity.status(HttpStatus.CREATED).body(paymentService.create(payment));
     }
     
@@ -117,9 +102,6 @@ public class PaymentController {
 
         return ResponseEntity.status(HttpStatus.CREATED).body(paymentService.update(payment));
     }
-<<<<<<< HEAD
-}
-=======
     
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("/accept/{id}")
@@ -140,4 +122,3 @@ public class PaymentController {
         return ResponseEntity.ok().build();
     }
 }
->>>>>>> das

@@ -19,10 +19,7 @@ public interface ILessonService {
     public Lesson findWithId(Long idLesson);
     
     public List<Lesson> findByName(String title); 
-<<<<<<< HEAD
-}
-=======
-    
+
     public void moreQuota(Long idLesson); 
     
     public void lessQuota(Long idLesson); 
@@ -31,4 +28,3 @@ public interface ILessonService {
     
     public boolean verifyDiscount(Discounts discount);*/
 }
->>>>>>> das
