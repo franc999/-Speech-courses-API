@@ -4,7 +4,7 @@ import com.manuels.principal.dao.IDateDao;
 import com.manuels.principal.dao.ILessonDao;
 import com.manuels.principal.models.DateC;
 import com.manuels.principal.models.Lesson;
-import com.manuels.principal.service.LessonService;
+//import com.manuels.principal.service.LessonService;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -25,7 +25,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
-@RunWith(MockitoJUnitRunner.class)
+/*@RunWith(MockitoJUnitRunner.class)
 @SpringBootTest
 @ExtendWith(MockitoExtension.class)
 public class LessonServiceTest {
@@ -220,4 +220,4 @@ public class LessonServiceTest {
         
         verify(lessonMock, times(2)).delete(lesson);
     }
-}
+}*/
