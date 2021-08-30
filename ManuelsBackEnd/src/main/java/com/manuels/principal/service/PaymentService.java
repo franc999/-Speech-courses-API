@@ -22,14 +22,15 @@ public class PaymentService implements IPaymentService{
     private ImageService imageService;
     
     @Autowired
-    private LessonService lessonService;
+    private EmailService emailService;
     
     @Autowired
-    private EmailService emailService;
+    private LessonService lessonService;
     
     @Override
     @Transactional(readOnly = true)
     public List<Payment> listPayments() {
+
         List<Payment> payments = paymentDao.findAll();
         
         payments.forEach(p -> {
@@ -41,7 +42,7 @@ public class PaymentService implements IPaymentService{
 
     @Override
     public Payment create(Payment payment) {
-        
+
         Image image = imageService.create(payment.getImage());
         payment.setImage(image);
         
@@ -83,14 +84,13 @@ public class PaymentService implements IPaymentService{
     @Override
     @Transactional(readOnly = true)
     public Payment findWithId(Long idPayment) {
-        Payment payment = paymentDao.findById(idPayment).orElse(null);
-        payment.getImage().setBytes(imageService.decompressBytes(payment.getImage().getBytes()));
-        return payment;
+        return paymentDao.findById(idPayment).orElse(null);
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<Payment> findByName(String name) {
+
         List<Payment> payments = paymentDao.findByName(name);
         
         payments.forEach(p -> {

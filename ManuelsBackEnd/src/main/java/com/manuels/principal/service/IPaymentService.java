@@ -16,7 +16,7 @@ public interface IPaymentService {
     public Payment findWithId(Long idPayment);
     
     public List<Payment> findByName(String name); 
-    
+
     public Payment setTrue (Long idPayment);
     
     public void setFalse (Long idPayment);
