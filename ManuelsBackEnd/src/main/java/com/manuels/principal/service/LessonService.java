@@ -1,11 +1,9 @@
 package com.manuels.principal.service;
 
 import com.manuels.principal.dao.ILessonDao;
-import com.manuels.principal.models.Discounts;
 import com.manuels.principal.models.Lesson;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,33 +83,4 @@ public class LessonService implements ILessonService{
         lesson.setQuota(lesson.getQuota() - 1);
         lessonDao.save(lesson);
     }
-    
-    /*@Override
-    public Lesson createDiscount(Lesson lesson){
-        Lesson existingLesson = lessonDao.findById(lesson.getIdLesson()).orElse(null);
-        if(existingLesson != null){
-                    
-            Discounts discount = new Discounts();
-            discount.setCode(lesson.getCode());
-            discount.setLesson(lesson);
-
-            discountsService.create(discount);
-        
-            existingLesson.setDiscountLink(lesson.getDiscountLink());
-        }
-        return lessonDao.save(existingLesson);
-    }
-    
-    @Override
-    public boolean verifyDiscount(Discounts discount){
-       /* Lesson lesson = lessonDao.findById(idLesson).orElse(null);
-        
-        if(lesson != null){
-        boolean flag = false;
-            List<Discounts> discounts = discountsService.findByCode(discount.getCode());
-            if(!discounts.isEmpty()){
-                flag=true;
-            }
-        return flag;
-    }*/
 }

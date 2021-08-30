@@ -35,6 +35,7 @@ public class PaymentController {
     @Autowired
     private ImageService imageService;
     
+    @PostMapping
     public ResponseEntity<Payment> create(@ModelAttribute Payment payment) throws IOException{
          System.out.println(payment);
         if(payment.getFile() != null && payment.getEmail() != null){

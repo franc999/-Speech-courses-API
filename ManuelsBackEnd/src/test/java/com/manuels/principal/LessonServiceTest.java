@@ -1,7 +1,6 @@
 package com.manuels.principal;
 
 import com.manuels.principal.dao.IDateDao;
-import com.manuels.principal.dao.ILessonDao;
 import com.manuels.principal.models.DateC;
 import com.manuels.principal.models.Lesson;
 //import com.manuels.principal.service.LessonService;

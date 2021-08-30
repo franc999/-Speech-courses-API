@@ -1,6 +1,5 @@
 package com.manuels.principal.service;
 
-import com.manuels.principal.models.Discounts;
 import com.manuels.principal.models.Lesson;
 import java.util.List;
 
@@ -23,8 +22,4 @@ public interface ILessonService {
     public void moreQuota(Long idLesson); 
     
     public void lessQuota(Long idLesson); 
-    
-    /*public Lesson createDiscount(Lesson lesson);
-    
-    public boolean verifyDiscount(Discounts discount);*/
 }
