@@ -19,7 +19,7 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-/* LIMITAR INICIOS DE SESION!!! !!!  ! !*/
+    
     @Autowired
     private MyUserDetailsService myUserDetailsService;
     
