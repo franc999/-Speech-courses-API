@@ -17,27 +17,4 @@ public class ExceptionService {
 
     @GetMapping(value = OUT_OF_TIME)
     public String outOfTime(){ return "{\"state\":\"off\"}";}
-    
-    
-    /*  EJEMPLO DE COMO LANZAR EXCEPTIONES 
-    @GetMapping(value = ERROR + ID)
-    public Dto doError(@RequestHeader String token,
-                       @PathVariable int id,
-                       @RequestParam String param){
-        
-        if(token.equals("kk")){
-            throw new MalformedHeaderException("token: " + token);
-        }
-        if(id == 0){
-            throw new NotFoundException("id: " + id);
-        }
-        if(param.isEmpty()){
-            throw new FieldInvalidException("param: " + param);
-        }
-        if(param.equals("kk")){
-            throw new FieldAlreadyExistException("param: " + param);
-        }
-        
-        //return new Dto(666, "daemon", Gender);
-    }*/
 }
