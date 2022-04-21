@@ -69,5 +69,5 @@ CREATE TABLE discounts(id_discount INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
                    alter table payment add column date_lesson date;
                    alter table lesson add column discount_link VARCHAR(150);
                    alter table lesson add column code VARCHAR(10);
-                  /*alter table publication add column date date;*/
+        
 				
