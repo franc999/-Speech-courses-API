@@ -11,9 +11,4 @@ public class ManuelsLocucionApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ManuelsLocucionApplication.class, args);
 	}
-        
-        @RequestMapping("/hello")
-        public String hello(){
-            return "HELLOO O OO  ";
-        }
 }
