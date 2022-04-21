@@ -107,7 +107,7 @@ public class LessonController {
         return ResponseEntity.status(HttpStatus.CREATED).body(lessonService.update(lesson));
     }
     
-    /*@PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/discounts")
     public ResponseEntity<Lesson> createDiscount(@RequestBody Lesson lesson){
         return ResponseEntity.status(HttpStatus.CREATED).body(lessonService.createDiscount(lesson));
@@ -122,5 +122,5 @@ public class LessonController {
             throw new Exception("El codigo ingresado es incorrecto");
         }
         return ResponseEntity.ok().build();
-    }*/
+    }
 }
